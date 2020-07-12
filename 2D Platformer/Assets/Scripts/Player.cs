@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriterender;
 
     //public Transform groundCheckPoint;
-    public Transform groundCheckA, groundCheckB, wallCheckA, wallCheckB;
+    public Transform groundCheckA, groundCheckB, wallCheckR1, wallCheckR2, wallCheckL1, wallCheckL2;
     public LayerMask ground;
 
     //Camera
@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     public float aheadAmount, aheadSpeed;
 
     //Jumping
+    public bool enableWallJumping = false;
     public float hangTime = 0.2f;
     private float hangCounter;
 
@@ -53,7 +54,7 @@ public class Player : MonoBehaviour
     private float standardGrav;
 
 
-    public bool isGrounded, wallTouch;
+    public bool isGrounded, wallTouch, wallToRight;
 
     public float vertical;
 
@@ -77,10 +78,26 @@ public class Player : MonoBehaviour
 
         if (!isGrounded)
         {
-            wallTouch = Physics2D.OverlapArea(wallCheckA.position, wallCheckB.position, ground);
-            if (wallTouch)
+            if (enableWallJumping == true) //Turn wall jumping on and off
             {
-                jumpState = 2;
+
+                
+                if (Physics2D.OverlapArea(wallCheckR1.position, wallCheckR2.position, ground) == true) //Checking if wall is to the right
+                {
+                    jumpState = 2;
+                    wallToRight = true;
+                    wallTouch = true;
+                    spriterender.flipX = false;
+                }
+                else if (Physics2D.OverlapArea(wallCheckL1.position, wallCheckL2.position, ground) == true) //Checking if wall is to the left
+                {
+                    jumpState = 2;
+                    wallToRight = false;
+                    wallTouch = true;
+                    spriterender.flipX = true;
+                }
+                else wallTouch = false;
+
             }
             walkState = true;
         }
@@ -88,6 +105,7 @@ public class Player : MonoBehaviour
         {
             jumpState = 1;
             prevWallDir = 0;
+            
         }
 
         //Hangtime
@@ -122,7 +140,8 @@ public class Player : MonoBehaviour
             }
         }
 
-
+        //Limiting max falling speed
+        if (myRigidbody.velocity.y < -20) myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, -20f);
 
         animationHandler();
 
@@ -188,14 +207,14 @@ public class Player : MonoBehaviour
                 //Wall Jump
                 case 2:
                     float wallJumpDirection;
-                    if (spriterender.flipX)
+                    if (wallToRight)
                     {
-                        wallJumpDirection = wallJumpSpeed;
+                        wallJumpDirection = wallJumpSpeed * -1; 
                         //thisWallDir = 1;
                     }
                     else
                     {
-                        wallJumpDirection = wallJumpSpeed * -1;
+                        wallJumpDirection = wallJumpSpeed;
                         //thisWallDir = 2;
                     }
                     myRigidbody.velocity = new Vector2(jumpForce * wallJumpDirection, jumpForce * wallJumpHeight * 1 / wallJumpCount);
