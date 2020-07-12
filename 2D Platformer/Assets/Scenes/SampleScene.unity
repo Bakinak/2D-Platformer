@@ -942,33 +942,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 343104032, guid: 297dcc5dbb8090a43b06a15d57c333df, type: 3}
-      propertyPath: m_Name
-      value: wallCheckR2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1539761184, guid: 297dcc5dbb8090a43b06a15d57c333df, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 1968133589881216155, guid: 297dcc5dbb8090a43b06a15d57c333df,
         type: 3}
       propertyPath: m_Name
       value: mike
-      objectReference: {fileID: 0}
-    - target: {fileID: 2553941678817233518, guid: 297dcc5dbb8090a43b06a15d57c333df,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2665109312936945659, guid: 297dcc5dbb8090a43b06a15d57c333df,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6648504875637787888, guid: 297dcc5dbb8090a43b06a15d57c333df,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8303038060566991218, guid: 297dcc5dbb8090a43b06a15d57c333df,
         type: 3}
@@ -978,7 +955,7 @@ PrefabInstance:
     - target: {fileID: 8303038060566991218, guid: 297dcc5dbb8090a43b06a15d57c333df,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8303038060566991218, guid: 297dcc5dbb8090a43b06a15d57c333df,
         type: 3}
