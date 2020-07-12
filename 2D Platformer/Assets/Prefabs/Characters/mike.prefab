@@ -302,10 +302,10 @@ MonoBehaviour:
   aheadSpeed: 3
   hangTime: 0.1
   jumpBufferLength: 0.1
-  slideSpeedBoost: 0.7
+  slideSpeedBoost: 5
   maxSlideTime: 0.5
   movementSpeed: 26
-  jumpForce: 6
+  jumpForce: 8
   wallJumpHeight: 2
   wallJumpSpeed: 1.3
   wallJumpCountModifier: 0.12

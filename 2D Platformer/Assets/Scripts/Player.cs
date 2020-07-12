@@ -123,6 +123,7 @@ public class Player : MonoBehaviour
         }
 
 
+
         animationHandler();
 
 
@@ -148,7 +149,7 @@ public class Player : MonoBehaviour
                 myRigidbody.velocity += new Vector2(horizontal * movementSpeed * Time.deltaTime, 0); //x= -1, y = 0;
             }
 
-            if (Mathf.Abs(Input.GetAxis("Horizontal")) == 0 && Mathf.Abs(myRigidbody.velocity.x) < 0.5)
+            if (Mathf.Abs(Input.GetAxis("Horizontal")) == 0 && Mathf.Abs(myRigidbody.velocity.x) < 1)
             {
                 myRigidbody.velocity = new Vector2(0, myRigidbody.velocity.y);
             }
