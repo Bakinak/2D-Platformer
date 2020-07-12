@@ -1,27 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class myGameManager : MonoBehaviour
 {
-    public GameObject healthBar;
+    
+    //Health
     public int playerHealth;
-    private Animator healthAnim;
+    int currentHealthDisplayed;
+    float healthUpSpeed = 0;
+
+    //UI Stuff
+    [SerializeField] GameObject healthBar;
+    [SerializeField] Sprite[] healthSprites;
+
     // Start is called before the first frame update
     void Start()
     {
-        healthAnim = healthBar.GetComponent<Animator>();
+        playerHealth = 16;
+        healthBar.GetComponent<Image>().sprite = healthSprites[playerHealth];
+        currentHealthDisplayed = playerHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        changeHealth();
+        //changeHealth(playerHealth);
+
+        //Health animation
+        healthUpSpeed += Time.deltaTime;
+        if(healthUpSpeed > 0.05)
+        {
+            healthUpSpeed = 0;
+            if(playerHealth > currentHealthDisplayed)
+            {
+                currentHealthDisplayed += 1;
+                healthBar.GetComponent<Image>().sprite = healthSprites[currentHealthDisplayed];
+            } else if(playerHealth < currentHealthDisplayed)
+            {
+                currentHealthDisplayed -= 1;
+                healthBar.GetComponent<Image>().sprite = healthSprites[currentHealthDisplayed];
+            }
+        }
+
     }
 
-    public void changeHealth()
+    public void changeHealth(int healthChange)
     {
-        healthAnim.SetInteger("health", playerHealth);
+        playerHealth += healthChange;
+        if (playerHealth > 15) playerHealth = 16;
+        else if (playerHealth < 1) playerHealth = 0;
+        //healthBar.GetComponent<Image>().sprite = healthSprites[playerHealth];
     }
 
 }
