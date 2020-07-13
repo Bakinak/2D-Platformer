@@ -307,7 +307,7 @@ MonoBehaviour:
   enableWallJumping: 0
   hangTime: 0.1
   jumpBufferLength: 0.1
-  slideSpeedBoost: 5
+  slideSpeedBoost: 9
   maxSlideTime: 0.5
   movementSpeed: 36
   jumpForce: 13

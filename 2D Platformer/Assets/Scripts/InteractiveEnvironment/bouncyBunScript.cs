@@ -10,6 +10,7 @@ public class bouncyBunScript : InteractEnviClass
     void Start()
     {
         animator = GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -22,6 +23,7 @@ public class bouncyBunScript : InteractEnviClass
     {
         collision.GetComponent<Rigidbody2D>().velocity = new Vector2(collision.GetComponent<Rigidbody2D>().velocity.x, bunBounciness);
         animator.Play("bouncyBun_Animations_Bounce");
+        
     }
 
 }

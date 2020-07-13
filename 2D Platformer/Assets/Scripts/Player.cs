@@ -266,11 +266,11 @@ public class Player : MonoBehaviour
             walkState = false;
             if (spriterender.flipX == true)
             {
-                myRigidbody.velocity -= new Vector2(slideSpeedBoost, 0f);
+                myRigidbody.velocity = new Vector2(-slideSpeedBoost, myRigidbody.velocity.y);
             }
             else
             {
-                myRigidbody.velocity += new Vector2(slideSpeedBoost, 0f);
+                myRigidbody.velocity = new Vector2(slideSpeedBoost, myRigidbody.velocity.y);
             }
 
             Debug.Log("sliding!");
