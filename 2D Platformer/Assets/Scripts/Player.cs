@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private BoxCollider2D myBoxCollider;
     private Animator animator;
     private SpriteRenderer spriterender;
+    private myGameManager manager;
 
     //public Transform groundCheckPoint;
     public Transform groundCheckA, groundCheckB, wallCheckR1, wallCheckR2, wallCheckL1, wallCheckL2;
@@ -30,7 +31,7 @@ public class Player : MonoBehaviour
     
 
     private int jumpState;
-    private int prevWallDir;// thisWallDir;
+    //private int prevWallDir;// thisWallDir;
 
     //Sliding
     private float slideBufferCounter;
@@ -66,7 +67,7 @@ public class Player : MonoBehaviour
         myBoxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
         spriterender = GetComponent<SpriteRenderer>();
-
+        manager = GameObject.Find("Manager").GetComponent<myGameManager>();
         standardGrav = myRigidbody.gravityScale;
     }
 
@@ -104,7 +105,7 @@ public class Player : MonoBehaviour
         else
         {
             jumpState = 1;
-            prevWallDir = 0;
+            //prevWallDir = 0;
             
         }
 
