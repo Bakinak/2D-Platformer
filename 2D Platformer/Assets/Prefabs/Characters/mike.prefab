@@ -310,7 +310,7 @@ MonoBehaviour:
   slideSpeedBoost: 9
   maxSlideTime: 0.5
   movementSpeed: 36
-  jumpForce: 13
+  jumpForce: 14
   wallJumpHeight: 1
   wallJumpSpeed: 1.3
   wallJumpCountModifier: 0.12

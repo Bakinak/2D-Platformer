@@ -273,7 +273,6 @@ public class Player : MonoBehaviour
                 myRigidbody.velocity = new Vector2(slideSpeedBoost, myRigidbody.velocity.y);
             }
 
-            Debug.Log("sliding!");
         }
 
         if (walkState == false)

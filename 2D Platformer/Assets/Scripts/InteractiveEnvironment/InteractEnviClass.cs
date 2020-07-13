@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractEnviClass : MonoBehaviour
 {
-
+#pragma warning disable 0649 //These pragma lines are used to stop console from printing warnings about these variables never being assigned. Other way to do it is to make them public instead of serialize.
     [SerializeField] bool playerTrigger;
     [SerializeField] bool playerProjectileTrigger;
     [SerializeField] bool enemyTrigger;
@@ -12,7 +12,7 @@ public class InteractEnviClass : MonoBehaviour
 
     [SerializeField] bool oneTimeOnly;
     [SerializeField] bool pressAndHold;
-
+#pragma warning restore 0649 //Enables warnings again, so I don't become unaware of fucking up some code later.
     bool alreadyActivated;
 
     // Start is called before the first frame update

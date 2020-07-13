@@ -12,9 +12,10 @@ public class myGameManager : MonoBehaviour
     float healthUpSpeed = 0;
 
     //UI Stuff
+#pragma warning disable 0649
     [SerializeField] GameObject healthBar;
     [SerializeField] Sprite[] healthSprites;
-
+#pragma warning restore
     // Start is called before the first frame update
     void Start()
     {
