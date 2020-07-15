@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
     public float maxAirdashTime;
     float airdashTime;
     bool airDashing;
-
+    bool airDashAvailable;
 
     //Gravity values
     public float jumpingGrav = 0.6f;
@@ -118,6 +118,7 @@ public class Player : MonoBehaviour
             jumpState = 1;
             wallJumpCount = 1;
             doubleJumpAvailable = true;
+            airDashAvailable = true;
             //prevWallDir = 0;
             
         }
@@ -276,11 +277,11 @@ public class Player : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1"))
         {
-            if (!isGrounded && !wallTouch && doubleJumpAvailable) //Air dash! Consider removing the wall touch parameter, probably not using it ever again.
+            if (!isGrounded && !wallTouch && airDashAvailable) //Air dash! Consider removing the wall touch parameter, probably not using it ever again.
             {
                 if (horizontal < 0 || spriterender.flipX == true && horizontal == 0) myRigidbody.velocity = new Vector2(-airDashSpeed, jumpForce * airDashJumpForce);
                 else myRigidbody.velocity = new Vector2(airDashSpeed, jumpForce * airDashJumpForce);
-                doubleJumpAvailable = false;
+                airDashAvailable = false;
                 walkState = false;
                 animator.Play("AirDash");
 

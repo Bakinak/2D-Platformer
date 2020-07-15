@@ -23,14 +23,19 @@ public class cameraScript : MonoBehaviour
     {
         if (followX)
         {
-            if(target.transform.position.x > xAxisClampL.position.x && target.transform.position.x < xAxisClampR.position.x)
-            transform.position = new Vector3(target.position.x, transform.position.y, -50);
+            if (xAxisClampL != null && xAxisClampR != null) {
+                if (target.transform.position.x > xAxisClampL.position.x && target.transform.position.x < xAxisClampR.position.x)
+                    transform.position = new Vector3(target.position.x, transform.position.y, -50);
+            } else transform.position = new Vector3(target.position.x, transform.position.y, -50);
         }
 
         if (followY)
         {
-            if(target.transform.position.y < yAxisClampT.position.y && target.transform.position.y > yAxisClampB.position.y)
-            transform.position = new Vector3(transform.position.x, target.transform.position.y, -50);
+            if (yAxisClampT != null && yAxisClampB != null)
+            {
+                if (target.transform.position.y < yAxisClampT.position.y && target.transform.position.y > yAxisClampB.position.y)
+                    transform.position = new Vector3(transform.position.x, target.transform.position.y, -50);
+            } else  transform.position = new Vector3(transform.position.x, target.transform.position.y, -50);
         }
     }
 }
