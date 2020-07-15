@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     private float hangCounter;
 
     public float jumpBufferLength = 0.2f;
-    private float jumpBufferCounter;
+    float jumpBufferCounter;
     
 
     private int jumpState;
@@ -48,6 +48,18 @@ public class Player : MonoBehaviour
     public float wallJumpSpeed = 1.5f;
     public float wallJumpCountModifier = 1;
     private float wallJumpCount = 1;
+
+    public float doubleJumpForce;
+    public float doubleJumpSpeedImpact;
+    public float doubleJumpMaxDownwardVelocity;
+
+    public float airDashJumpForce;
+    public float airDashSpeed;
+    bool doubleJumpAvailable;
+    public float maxAirdashTime;
+    float airdashTime;
+    bool airDashing;
+
 
     //Gravity values
     public float jumpingGrav = 0.6f;
@@ -81,8 +93,7 @@ public class Player : MonoBehaviour
         {
             if (enableWallJumping == true) //Turn wall jumping on and off
             {
-
-                
+              
                 if (Physics2D.OverlapArea(wallCheckR1.position, wallCheckR2.position, ground) == true) //Checking if wall is to the right
                 {
                     jumpState = 2;
@@ -100,11 +111,13 @@ public class Player : MonoBehaviour
                 else wallTouch = false;
 
             }
-            walkState = true;
+
         }
-        else
+        else //Everything we need to do when the player is grounded. Resetting things and such, for example.
         {
             jumpState = 1;
+            wallJumpCount = 1;
+            doubleJumpAvailable = true;
             //prevWallDir = 0;
             
         }
@@ -119,13 +132,7 @@ public class Player : MonoBehaviour
             hangCounter += Time.deltaTime;
         }
 
-        if (isGrounded)
-        {
-            wallJumpCount = 1;
-        }
-
         jump();
-        airdash();
         slide();
 
         if (adaptiveCamera)
@@ -183,12 +190,23 @@ public class Player : MonoBehaviour
         //Jump Buffer
         if (Input.GetButtonDown("Jump"))
         {
-            jumpBufferCounter = jumpBufferLength;
+            if (!isGrounded && !wallTouch && doubleJumpAvailable && myRigidbody.velocity.y > doubleJumpMaxDownwardVelocity && hangCounter >= hangTime)//Check if we are in the air and can do a double jump. If not, we do normal jumping
+            {
+                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x * doubleJumpSpeedImpact, jumpForce*doubleJumpForce);
+                doubleJumpAvailable = false; //Disable it after one.
+                animator.Play("DoubleJump");
+            }
+            else
+            {
+                jumpBufferCounter = jumpBufferLength; //Whenever we press the jump button, our buffer counter is set equal to the buffer length
+            }
+            walkState = true;
         }
         else
         {
-            jumpBufferCounter -= Time.deltaTime;
+            jumpBufferCounter -= Time.deltaTime; //The counter is then reduced over time, and if we reach a state where we can jump before it goes under 0, like when we just land, we jump again.
         }
+
 
         //Applying Jump. Need a bunch of if statements in here to determine what kind of jump the character is doing. Unless we do switch statement, and change your state somewhere else!
         if (jumpBufferCounter >= 0 && hangCounter <= hangTime)
@@ -202,7 +220,7 @@ public class Player : MonoBehaviour
             {
                 //Normal Jump
                 case 1:
-                    myRigidbody.velocity += new Vector2(0, jumpForce);
+                    myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
                     break;
 
                 //Wall Jump
@@ -226,23 +244,27 @@ public class Player : MonoBehaviour
                     prevWallDir = thisWallDir;*/
                     wallJumpCount += wallJumpCountModifier;
                     break;
+
             }
             
         }
 
-        if (Input.GetButtonUp("Jump") && myRigidbody.velocity.y > 0)
+        if (Input.GetButtonUp("Jump") && myRigidbody.velocity.y > 0) //Making it so that when you release the jump button, you don't jump as high as if you held it.
         {
             myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y * 0.5f);
         }
 
-        if (myRigidbody.velocity.y < 0 && !wallTouch)
+        if (enableWallJumping)
         {
+            if (myRigidbody.velocity.y < 0 && !wallTouch) //Making it so that when you are against a wall, you don't fall as quick? Depends on standard grav.
+            {
 
-            myRigidbody.gravityScale = standardGrav;
-            
+                myRigidbody.gravityScale = standardGrav;
+
+            }
         }
 
-        if (Input.GetAxis("Vertical") < 0)
+        if (Input.GetAxis("Vertical") < 0) //Making it so that if you hold down, you fall quicker.
         {
             myRigidbody.gravityScale = quickFallGrav;
         }
@@ -254,14 +276,25 @@ public class Player : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1"))
         {
-            slideBufferCounter = jumpBufferLength;
+            if (!isGrounded && !wallTouch && doubleJumpAvailable) //Air dash! Consider removing the wall touch parameter, probably not using it ever again.
+            {
+                if (horizontal < 0 || spriterender.flipX == true && horizontal == 0) myRigidbody.velocity = new Vector2(-airDashSpeed, jumpForce * airDashJumpForce);
+                else myRigidbody.velocity = new Vector2(airDashSpeed, jumpForce * airDashJumpForce);
+                doubleJumpAvailable = false;
+                walkState = false;
+                animator.Play("AirDash");
+
+            }
+            else {
+                slideBufferCounter = jumpBufferLength;
+            }
         }
         else
         {
             slideBufferCounter -= Time.deltaTime;
         }
 
-        if (slideBufferCounter >=0 && isGrounded && walkState == true)
+        if (slideBufferCounter >=0 && isGrounded && walkState == true) //Normal Dash!
         {
             walkState = false;
             if (spriterender.flipX == true)
@@ -286,15 +319,8 @@ public class Player : MonoBehaviour
         }
 
     }
-    
 
-    void airdash()
-    {
-        if (Input.GetButtonDown("Fire1") && !isGrounded)
-        {
-            Debug.Log("dashing!");
-        }
-    }
+
 
     void animationHandler()
     {

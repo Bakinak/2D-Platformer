@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5307565321351475215}
   - component: {fileID: 279388553029649046}
   - component: {fileID: 279388553029649047}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bouncyBun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -141900831
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_Sprite: {fileID: -6035257373562501263, guid: 2b0e6eb01d57518429cde94eeba1001c,
     type: 3}
@@ -148,4 +148,5 @@ MonoBehaviour:
   enemyProjectileTrigger: 0
   oneTimeOnly: 0
   pressAndHold: 0
-  bunBounciness: 20
+  bunBouncinessY: 20
+  bunBouncinessX: 0
