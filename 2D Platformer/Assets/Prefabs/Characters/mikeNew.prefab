@@ -195,9 +195,9 @@ MonoBehaviour:
   wallJumpSpeed: 1.3
   wallJumpCountModifier: 0.12
   doubleJumpForce: 1
-  doubleJumpSpeedImpact: 0.5
+  doubleJumpSpeedImpact: 0
   doubleJumpMaxDownwardVelocity: -10
-  airDashJumpForce: 0.6
+  airDashJumpForce: 0.4
   airDashSpeed: 18
   maxAirdashTime: 0
   jumpingGrav: 1

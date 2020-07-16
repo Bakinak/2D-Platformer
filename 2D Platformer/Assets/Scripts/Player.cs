@@ -295,17 +295,11 @@ public class Player : MonoBehaviour
             slideBufferCounter -= Time.deltaTime;
         }
 
-        if (slideBufferCounter >=0 && isGrounded && walkState == true) //Normal Dash!
+        if (slideBufferCounter >=0 && isGrounded && walkState == true) //Normal Slide!
         {
             walkState = false;
-            if (spriterender.flipX == true)
-            {
-                myRigidbody.velocity = new Vector2(-slideSpeedBoost, myRigidbody.velocity.y);
-            }
-            else
-            {
-                myRigidbody.velocity = new Vector2(slideSpeedBoost, myRigidbody.velocity.y);
-            }
+            if (horizontal < 0 || spriterender.flipX == true && horizontal == 0) myRigidbody.velocity = new Vector2(-slideSpeedBoost, myRigidbody.velocity.y);
+            else  myRigidbody.velocity = new Vector2(slideSpeedBoost, myRigidbody.velocity.y);
 
         }
 
