@@ -23,10 +23,10 @@ public class Player : MonoBehaviour
 
     //Jumping
     public bool enableWallJumping = false;
-    public float hangTime = 0.2f;
+    public float hangTime = 0.1f;
     private float hangCounter;
 
-    public float jumpBufferLength = 0.2f;
+    public float jumpBufferLength = 0.1f;
     float jumpBufferCounter;
     
 
@@ -37,33 +37,33 @@ public class Player : MonoBehaviour
     private float slideBufferCounter;
     private bool walkState;
     private float slideTime;
-    public float slideSpeedBoost;
-    public float maxSlideTime;
+    public float slideSpeedBoost = 12;
+    public float maxSlideTime = 0.5f;
     
 
     //Movement speed and jump force and funny things.
-    public float movementSpeed = 1;
-    public float jumpForce = 1;
-    public float wallJumpHeight = 1.2f;
-    public float wallJumpSpeed = 1.5f;
-    public float wallJumpCountModifier = 1;
+    public float movementSpeed = 36;
+    public float jumpForce = 14;
+    public float wallJumpHeight = 1f;
+    public float wallJumpSpeed = 1.3f;
+    public float wallJumpCountModifier = 0.12f;
     private float wallJumpCount = 1;
 
-    public float doubleJumpForce;
+    public float doubleJumpForce = 1;
     public float doubleJumpSpeedImpact;
-    public float doubleJumpMaxDownwardVelocity;
+    public float doubleJumpMaxDownwardVelocity = -10;
 
-    public float airDashJumpForce;
-    public float airDashSpeed;
+    public float airDashJumpForce = 0.4f;
+    public float airDashSpeed = 18;
     bool doubleJumpAvailable;
-    public float maxAirdashTime;
+    public float maxAirdashTime = 0;
     float airdashTime;
     bool airDashing;
     bool airDashAvailable;
 
     //Gravity values
-    public float jumpingGrav = 0.6f;
-    public float quickFallGrav = 1.2f;
+    public float jumpingGrav = 1;
+    public float quickFallGrav = 1.4f;
     private float standardGrav;
 
 
