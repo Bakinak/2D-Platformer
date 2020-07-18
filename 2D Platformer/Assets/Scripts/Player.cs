@@ -44,10 +44,6 @@ public class Player : MonoBehaviour
     //Movement speed and jump force and funny things.
     public float movementSpeed = 36;
     public float jumpForce = 14;
-    public float wallJumpHeight = 1f;
-    public float wallJumpSpeed = 1.3f;
-    public float wallJumpCountModifier = 0.12f;
-    private float wallJumpCount = 1;
 
     public float doubleJumpForce = 1;
     public float doubleJumpSpeedImpact;
@@ -67,7 +63,7 @@ public class Player : MonoBehaviour
     private float standardGrav;
 
 
-    public bool isGrounded, wallTouch, wallToRight;
+    public bool isGrounded, wallToRight;
 
     public float vertical;
 
@@ -91,40 +87,18 @@ public class Player : MonoBehaviour
 
         if (!isGrounded)
         {
-            if (enableWallJumping == true) //Turn wall jumping on and off
-            {
-              
-                if (Physics2D.OverlapArea(wallCheckR1.position, wallCheckR2.position, ground) == true) //Checking if wall is to the right
-                {
-                    jumpState = 2;
-                    wallToRight = true;
-                    wallTouch = true;
-                    spriterender.flipX = false;
-                }
-                else if (Physics2D.OverlapArea(wallCheckL1.position, wallCheckL2.position, ground) == true) //Checking if wall is to the left
-                {
-                    jumpState = 2;
-                    wallToRight = false;
-                    wallTouch = true;
-                    spriterender.flipX = true;
-                }
-                else wallTouch = false;
-
-            }
 
         }
         else //Everything we need to do when the player is grounded. Resetting things and such, for example.
         {
             jumpState = 1;
-            wallJumpCount = 1;
             doubleJumpAvailable = true;
             airDashAvailable = true;
-            //prevWallDir = 0;
             
         }
 
         //Hangtime
-        if (isGrounded || wallTouch)
+        if (isGrounded)
         {
             hangCounter = 0;
         }
@@ -191,7 +165,7 @@ public class Player : MonoBehaviour
         //Jump Buffer
         if (Input.GetButtonDown("Jump"))
         {
-            if (!isGrounded && !wallTouch && doubleJumpAvailable && myRigidbody.velocity.y > doubleJumpMaxDownwardVelocity && hangCounter >= hangTime)//Check if we are in the air and can do a double jump. If not, we do normal jumping
+            if (!isGrounded && doubleJumpAvailable && myRigidbody.velocity.y > doubleJumpMaxDownwardVelocity && hangCounter >= hangTime)//Check if we are in the air and can do a double jump. If not, we do normal jumping
             {
                 myRigidbody.velocity = new Vector2(myRigidbody.velocity.x * doubleJumpSpeedImpact, jumpForce*doubleJumpForce);
                 doubleJumpAvailable = false; //Disable it after one.
@@ -224,28 +198,6 @@ public class Player : MonoBehaviour
                     myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
                     break;
 
-                //Wall Jump
-                case 2:
-                    float wallJumpDirection;
-                    if (wallToRight)
-                    {
-                        wallJumpDirection = wallJumpSpeed * -1; 
-                        //thisWallDir = 1;
-                    }
-                    else
-                    {
-                        wallJumpDirection = wallJumpSpeed;
-                        //thisWallDir = 2;
-                    }
-                    myRigidbody.velocity = new Vector2(jumpForce * wallJumpDirection, jumpForce * wallJumpHeight * 1 / wallJumpCount);
-                    /*if (thisWallDir != prevWallDir)
-                    {
-                        myRigidbody.velocity = new Vector2(jumpForce * wallJumpDirection, jumpForce * wallJumpHeight);
-                    }
-                    prevWallDir = thisWallDir;*/
-                    wallJumpCount += wallJumpCountModifier;
-                    break;
-
             }
             
         }
@@ -255,15 +207,6 @@ public class Player : MonoBehaviour
             myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y * 0.5f);
         }
 
-        if (enableWallJumping)
-        {
-            if (myRigidbody.velocity.y < 0 && !wallTouch) //Making it so that when you are against a wall, you don't fall as quick? Depends on standard grav.
-            {
-
-                myRigidbody.gravityScale = standardGrav;
-
-            }
-        }
 
         if (Input.GetAxis("Vertical") < 0) //Making it so that if you hold down, you fall quicker.
         {
@@ -277,12 +220,13 @@ public class Player : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1"))
         {
-            if (!isGrounded && !wallTouch && airDashAvailable) //Air dash! Consider removing the wall touch parameter, probably not using it ever again.
+            if (!isGrounded && airDashAvailable) //Air dash! Consider removing the wall touch parameter, probably not using it ever again.
             {
                 if (horizontal < 0 || spriterender.flipX == true && horizontal == 0) myRigidbody.velocity = new Vector2(-airDashSpeed, jumpForce * airDashJumpForce);
                 else myRigidbody.velocity = new Vector2(airDashSpeed, jumpForce * airDashJumpForce);
                 airDashAvailable = false;
                 walkState = false;
+                slideTime = 0;
                 animator.Play("AirDash");
 
             }
@@ -298,6 +242,7 @@ public class Player : MonoBehaviour
         if (slideBufferCounter >=0 && isGrounded && walkState == true) //Normal Slide!
         {
             walkState = false;
+            slideTime = 0;
             if (horizontal < 0 || spriterender.flipX == true && horizontal == 0) myRigidbody.velocity = new Vector2(-slideSpeedBoost, myRigidbody.velocity.y);
             else  myRigidbody.velocity = new Vector2(slideSpeedBoost, myRigidbody.velocity.y);
 
@@ -335,7 +280,6 @@ public class Player : MonoBehaviour
 
         //Jumping
         animator.SetBool("Grounded", isGrounded);
-        animator.SetBool("WallTouch", wallTouch);
         animator.SetBool("SlideOrNot", walkState);
     }
 }
