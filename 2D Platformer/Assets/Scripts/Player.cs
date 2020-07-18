@@ -62,14 +62,35 @@ public class Player : MonoBehaviour
     public float quickFallGrav = 1.4f;
     private float standardGrav;
 
+    //Attacks
+    public float action1Cooldown;
+    float action1Time;
+    public float action2Cooldown;
+    float action2Time;
 
-    public bool isGrounded, wallToRight;
 
+    public bool isGrounded;
     public float vertical;
 
     float horizontal;
 
     void Start()
+    {
+        putThisInStart();
+    }
+
+    void Update()
+    {
+        putThisInUpdate();
+    }
+
+
+    void FixedUpdate()
+    {
+        putThisInFixedUpdate();
+    }
+
+    public void putThisInStart()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myBoxCollider = GetComponent<BoxCollider2D>();
@@ -79,7 +100,7 @@ public class Player : MonoBehaviour
         standardGrav = myRigidbody.gravityScale;
     }
 
-    void Update()
+    public void putThisInUpdate()
     {
         vertical = Input.GetAxis("Vertical");
 
@@ -94,7 +115,7 @@ public class Player : MonoBehaviour
             jumpState = 1;
             doubleJumpAvailable = true;
             airDashAvailable = true;
-            
+
         }
 
         //Hangtime
@@ -126,20 +147,16 @@ public class Player : MonoBehaviour
         //Limiting max falling speed
         if (myRigidbody.velocity.y < -20) myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, -20f);
 
+
+
         animationHandler();
-
-
     }
 
-
-    void FixedUpdate()
-    { 
+    public void putThisInFixedUpdate()
+    {
         horizontal = Input.GetAxis("Horizontal");
         HandleMovement(horizontal);
-        
     }
-
-    
 
     void HandleMovement(float horizontal)
     {
@@ -281,5 +298,35 @@ public class Player : MonoBehaviour
         //Jumping
         animator.SetBool("Grounded", isGrounded);
         animator.SetBool("SlideOrNot", walkState);
+    }
+
+
+    void attacks()
+    {
+        if (Input.GetButtonDown("Fire2") && action1Time < 0)
+        {
+            action1();
+            action1Time = action1Cooldown;
+        }
+
+        if (Input.GetButtonDown("Fire3") && action2Time < 0)
+        {
+            action2();
+            action2Time = action2Cooldown;
+        }
+
+        action1Time -= Time.deltaTime;
+        action2Time -= Time.deltaTime;
+
+    }
+
+    public virtual void action1()
+    {
+
+    }
+
+    public virtual void action2()
+    {
+
     }
 }
