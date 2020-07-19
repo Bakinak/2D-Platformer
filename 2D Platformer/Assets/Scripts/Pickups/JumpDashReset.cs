@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpDashReset : PickUpClass
+public class JumpDashReset : MonoBehaviour
 {
-    public float jumpBoost = 2;
+    float jumpBoost = 6;
     public float respawnTime;
     bool popped;
     bool theSecondPoppening;
@@ -39,16 +39,19 @@ public class JumpDashReset : PickUpClass
         
     }
 
-    public override void action(GameObject target)
+     void action(GameObject target)
     {
-        timePassed = respawnTime;
-        animator.SetTrigger("Pop");
-        popped = true;
+        if (!target.GetComponent<Player>().doubleJumpAvailable || !target.GetComponent<Player>().airDashAvailable)
+        {
+            timePassed = respawnTime;
+            animator.SetTrigger("Pop");
+            popped = true;
 
-        GetComponent<BoxCollider2D>().enabled = false;
-        target.GetComponent<Player>().resettingDashAndJump();
-        target.GetComponent<Rigidbody2D>().velocity = new Vector2(target.GetComponent<Rigidbody2D>().velocity.x, jumpBoost);
-
+            GetComponent<BoxCollider2D>().enabled = false;
+            target.GetComponent<Player>().resettingDashAndJump();
+            if (target.GetComponent<Rigidbody2D>().velocity.y < jumpBoost) target.GetComponent<Rigidbody2D>().velocity = new Vector2(target.GetComponent<Rigidbody2D>().velocity.x, jumpBoost);
+            else target.GetComponent<Rigidbody2D>().velocity = new Vector2(target.GetComponent<Rigidbody2D>().velocity.x, target.GetComponent<Rigidbody2D>().velocity.y);
+        }
     }
 
     void toggleStuff(bool state)
@@ -56,6 +59,14 @@ public class JumpDashReset : PickUpClass
         GetComponent<BoxCollider2D>().enabled = state;
         GetComponent<SpriteRenderer>().enabled = state;
         //GetComponent<Animator>().enabled = state;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == ("Player"))
+        {
+            action(collision.gameObject);
+        }
     }
 
 }

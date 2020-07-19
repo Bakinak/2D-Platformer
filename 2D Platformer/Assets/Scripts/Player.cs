@@ -50,11 +50,11 @@ public class Player : MonoBehaviour
 
     public float airDashJumpForce = 0.4f;
     public float airDashSpeed = 18;
-    bool doubleJumpAvailable;
+    public bool doubleJumpAvailable;
     public float maxAirdashTime = 0;
     float airdashTime;
     bool airDashing;
-    bool airDashAvailable;
+    public bool airDashAvailable;
 
     //Gravity values
     public float jumpingGrav = 1;
