@@ -13,16 +13,15 @@ public class Player : MonoBehaviour
     private myGameManager manager;
 
     //public Transform groundCheckPoint;
-    public Transform groundCheckA, groundCheckB, wallCheckR1, wallCheckR2, wallCheckL1, wallCheckL2;
+    public Transform groundCheckA, groundCheckB;
     public LayerMask ground;
 
     //Camera
-    public bool adaptiveCamera;
+    /*public bool adaptiveCamera;
     public Transform camTarget;
-    public float aheadAmount, aheadSpeed;
+    public float aheadAmount, aheadSpeed;*/
 
     //Jumping
-    public bool enableWallJumping = false;
     public float hangTime = 0.1f;
     private float hangCounter;
 
@@ -128,10 +127,12 @@ public class Player : MonoBehaviour
             hangCounter += Time.deltaTime;
         }
 
+        //Functions and stuff
         jump();
         slide();
+        attacks();
 
-        if (adaptiveCamera)
+        /*if (adaptiveCamera)
         {
             //Moving Camera
             if (Input.GetAxisRaw("Horizontal") != 0)
@@ -142,7 +143,7 @@ public class Player : MonoBehaviour
             {
                 camTarget.localPosition = new Vector3(Mathf.Lerp(camTarget.localPosition.x, 0, aheadSpeed / 2 * Time.deltaTime), camTarget.localPosition.y, camTarget.localPosition.z);
             }
-        }
+        }*/
 
         //Limiting max falling speed
         if (myRigidbody.velocity.y < -20) myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, -20f);
