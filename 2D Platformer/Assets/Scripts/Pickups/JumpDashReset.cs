@@ -7,6 +7,7 @@ public class JumpDashReset : PickUpClass
     public float jumpBoost = 2;
     public float respawnTime;
     bool popped;
+    bool theSecondPoppening;
     Animator animator;
     float timePassed;
     // Start is called before the first frame update
@@ -21,14 +22,19 @@ public class JumpDashReset : PickUpClass
         //PROBLEM: THE ANIMATION IS STILL PLAYING IDLE WHEN WE POP, AND IT RUNS THIS CODE ONCE IN UPDATE BEFORE PLAYING ANIMATION, WHICH MEANS SPRITE RENDERER IS TURNED OFF IMMEDIATELY, AND NOT AFTER ANIMATION
         if (popped == true && animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
-            Debug.Log(animator.GetCurrentAnimatorStateInfo(0).shortNameHash.ToString());
-            GetComponent<SpriteRenderer>().enabled = false;
+            if(timePassed < respawnTime)
+            {
+                GetComponent<SpriteRenderer>().enabled = false;
+            }
+            
             timePassed -= Time.deltaTime;
-            if(timePassed < 0)
+            if (timePassed < 0)
             {
                 popped = false;
                 toggleStuff(true);
             }
+
+
         }
         
     }
