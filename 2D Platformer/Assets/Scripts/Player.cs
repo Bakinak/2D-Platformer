@@ -111,9 +111,7 @@ public class Player : MonoBehaviour
         }
         else //Everything we need to do when the player is grounded. Resetting things and such, for example.
         {
-            jumpState = 1;
-            doubleJumpAvailable = true;
-            airDashAvailable = true;
+            resettingDashAndJump();
 
         }
 
@@ -299,6 +297,13 @@ public class Player : MonoBehaviour
         //Jumping
         animator.SetBool("Grounded", isGrounded);
         animator.SetBool("SlideOrNot", walkState);
+    }
+
+    public void resettingDashAndJump()
+    {
+        jumpState = 1;
+        doubleJumpAvailable = true;
+        airDashAvailable = true;
     }
 
 
