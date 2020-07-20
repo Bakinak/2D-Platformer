@@ -66,7 +66,9 @@ public class Player : MonoBehaviour
     float action1Time;
     public float action2Cooldown;
     float action2Time;
-
+    bool invincible;
+    float invincibilityTime = 1f; //How long the player can't take damage after having taken damage. Safety time, so your health isn't just drained.
+    float timeInvincible;
 
     public bool isGrounded;
     public float vertical;
@@ -146,7 +148,12 @@ public class Player : MonoBehaviour
         //Limiting max falling speed
         if (myRigidbody.velocity.y < -20) myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, -20f);
 
-
+        //Incinvibility
+        if (invincible)
+        {
+            timeInvincible -= Time.deltaTime;
+            if (timeInvincible <= 0) invincible = false;
+        }
 
         animationHandler();
     }
@@ -277,7 +284,6 @@ public class Player : MonoBehaviour
     }
 
 
-
     void animationHandler()
     {
         //Animation
@@ -324,6 +330,21 @@ public class Player : MonoBehaviour
         action1Time -= Time.deltaTime;
         action2Time -= Time.deltaTime;
 
+    }
+
+    public void takeDamage(int damage)//Add invincibility frames.
+    {
+        if (!invincible)
+        {
+            manager.changeHealth(-damage);
+            invincible = true;
+            timeInvincible = invincibilityTime;
+        }
+    }
+
+    public void gainHealth(int heal) //Play healing sound also. Unless that is done in the manager every time health ticks up.
+    {
+        manager.changeHealth(heal);
     }
 
     public virtual void action1()
