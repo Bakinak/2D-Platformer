@@ -30,18 +30,22 @@ public class myGameManager : MonoBehaviour
         //changeHealth(playerHealth);
 
         //Health animation
-        healthUpSpeed += Time.deltaTime;
-        if(healthUpSpeed > 0.05)
+        if (playerHealth != currentHealthDisplayed)
         {
-            healthUpSpeed = 0;
-            if(playerHealth > currentHealthDisplayed)
+            healthUpSpeed += Time.deltaTime;
+            if (healthUpSpeed > 0.05)
             {
-                currentHealthDisplayed += 1;
-                healthBar.GetComponent<Image>().sprite = healthSprites[currentHealthDisplayed];
-            } else if(playerHealth < currentHealthDisplayed)
-            {
-                currentHealthDisplayed -= 1;
-                healthBar.GetComponent<Image>().sprite = healthSprites[currentHealthDisplayed];
+                healthUpSpeed = 0;
+                if (playerHealth > currentHealthDisplayed)
+                {
+                    currentHealthDisplayed += 1;
+                    healthBar.GetComponent<Image>().sprite = healthSprites[currentHealthDisplayed];
+                }
+                else if (playerHealth < currentHealthDisplayed)
+                {
+                    currentHealthDisplayed -= 1;
+                    healthBar.GetComponent<Image>().sprite = healthSprites[currentHealthDisplayed];
+                }
             }
         }
 
