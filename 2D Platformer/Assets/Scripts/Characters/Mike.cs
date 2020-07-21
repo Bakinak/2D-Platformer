@@ -30,7 +30,6 @@ public class Mike : Player
 
     public override void action1(bool direction)
     {
-        Debug.Log("1");
         if (!direction)
         {
             enemiesToDamage = Physics2D.OverlapAreaAll(attackPos1.position, attackPos2.position, enemyLayer);
@@ -53,9 +52,13 @@ public class Mike : Player
 
     public override void action2(bool direction)
     {
-        Debug.Log("2");
         enemiesToDamage = Physics2D.OverlapAreaAll(attack2Pos1.position, attack2Pos2.position, enemyLayer);
         var slash = Instantiate(swordSlash, new Vector3(transform.position.x, transform.position.y + slashDistance), Quaternion.Euler(new Vector3(0,0,90)));
         slash.transform.parent = transform;
+
+        for (int i = 0; i < enemiesToDamage.Length; i++)
+        {
+            enemiesToDamage[i].GetComponent<EnemyClass>().takeDamage(damage);
+        }
     }
 }

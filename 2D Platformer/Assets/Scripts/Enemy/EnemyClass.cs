@@ -51,7 +51,7 @@ public class EnemyClass : MonoBehaviour
 
         if(health <= 0)
         {
-            deathAnim.SetActive(true);
+            if(deathAnim != null) Instantiate(deathAnim, transform.position, transform.rotation);
             gameObject.SetActive(false);
         }
         else

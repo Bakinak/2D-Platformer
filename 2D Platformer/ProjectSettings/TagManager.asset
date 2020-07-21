@@ -52,14 +52,17 @@ TagManager:
   - name: Level
     uniqueID: 4153066465
     locked: 0
-  - name: Effects
-    uniqueID: 3792422759
-    locked: 0
   - name: Pickups
     uniqueID: 2290937753
     locked: 0
   - name: Enemies
     uniqueID: 2556398285
+    locked: 0
+  - name: PlayerAttacks
+    uniqueID: 2874445701
+    locked: 0
+  - name: Effects
+    uniqueID: 3792422759
     locked: 0
   - name: EnemyProjectiles
     uniqueID: 1559351095
