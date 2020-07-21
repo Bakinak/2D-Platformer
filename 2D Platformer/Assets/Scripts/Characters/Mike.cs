@@ -10,6 +10,7 @@ public class Mike : Player
     Collider2D[] enemiesToDamage;
     public GameObject swordSlash;
     float slashDistance = 1.7f;
+    public bool flipSlash;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,7 @@ public class Mike : Player
         {
             enemiesToDamage = Physics2D.OverlapAreaAll(attackPos1.position, attackPos2.position, enemyLayer);
             var slash = Instantiate(swordSlash, new Vector3(transform.position.x + slashDistance, transform.position.y), transform.rotation);
+            slash.GetComponent<SpriteRenderer>().flipY = flipSlash;
             slash.transform.parent = transform;
         }
         else
@@ -41,13 +43,11 @@ public class Mike : Player
             enemiesToDamage = Physics2D.OverlapAreaAll(attackPos1.position, attackPos3.position, enemyLayer);
             var slash = Instantiate(swordSlash, new Vector3(transform.position.x - slashDistance, transform.position.y), transform.rotation);
             slash.GetComponent<SpriteRenderer>().flipX = true;
+            slash.GetComponent<SpriteRenderer>().flipY = flipSlash;
             slash.transform.parent = transform;
         }
 
-        for (int i = 0; i < enemiesToDamage.Length; i++)
-        {
-            enemiesToDamage[i].GetComponent<EnemyClass>().takeDamage(damage);
-        }
+        applyDamage();
     }
 
     public override void action2(bool direction)
@@ -55,10 +55,17 @@ public class Mike : Player
         enemiesToDamage = Physics2D.OverlapAreaAll(attack2Pos1.position, attack2Pos2.position, enemyLayer);
         var slash = Instantiate(swordSlash, new Vector3(transform.position.x, transform.position.y + slashDistance), Quaternion.Euler(new Vector3(0,0,90)));
         slash.transform.parent = transform;
+        slash.GetComponent<SpriteRenderer>().flipY = flipSlash;
 
+        applyDamage();
+    }
+
+    void applyDamage()
+    {
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {
             enemiesToDamage[i].GetComponent<EnemyClass>().takeDamage(damage);
         }
+        flipSlash = !flipSlash;
     }
 }

@@ -313,7 +313,7 @@ public class Player : MonoBehaviour
     }
 
 
-    void attacks()
+    void attacks() //Make it so that this works in same way as jumping, with a buffer that triggers an attack if you press it slightly before it is ready.
     {
         if (Input.GetButtonDown("Fire2") && action1Time <= 0)
         {
