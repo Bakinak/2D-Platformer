@@ -315,20 +315,20 @@ public class Player : MonoBehaviour
 
     void attacks()
     {
-        if (Input.GetButtonDown("Fire2") && action1Time < 0)
+        if (Input.GetButtonDown("Fire2") && action1Time <= 0)
         {
-            action1();
+            action1(spriterender.flipX);
             action1Time = action1Cooldown;
         }
 
-        if (Input.GetButtonDown("Fire3") && action2Time < 0)
+        if (Input.GetButtonDown("Fire3") && action2Time <= 0)
         {
-            action2();
+            action2(spriterender.flipX);
             action2Time = action2Cooldown;
         }
 
-        action1Time -= Time.deltaTime;
-        action2Time -= Time.deltaTime;
+        if(action1Time > 0) action1Time -= Time.deltaTime;
+        if(action2Time > 0) action2Time -= Time.deltaTime;
 
     }
 
@@ -347,12 +347,12 @@ public class Player : MonoBehaviour
         manager.changeHealth(heal);
     }
 
-    public virtual void action1()
+    public virtual void action1(bool direction) //Direction used to know which way attack goes... obviously. But the sprite renderer is not available to each character, so it is sent here.
     {
 
     }
 
-    public virtual void action2()
+    public virtual void action2(bool direction)
     {
 
     }

@@ -2291,6 +2291,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: blockEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1752672374232788754, guid: 2003494485605ff48a0be9e438fd22e5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 6437531721940673314, guid: 2003494485605ff48a0be9e438fd22e5,
     type: 3}
@@ -2318,10 +2323,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e92dc95df763dea4b8aca642d9896ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 10
   damageOnTouch: 2
   movementSpeed: 0
-  deathAnim: {fileID: 0}
+  deathAnim: {fileID: 6948591422543004691, guid: 59c93886666d207459f624ca0b489958,
+    type: 3}
 --- !u!61 &309398238
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6159,6 +6165,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 195231619, guid: cb34f8b053ff2fc46ac0f8978e018cc6, type: 3}
+      propertyPath: damage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 195231619, guid: cb34f8b053ff2fc46ac0f8978e018cc6, type: 3}
+      propertyPath: swordSlash
+      value: 
+      objectReference: {fileID: 3771806071352309463, guid: d40c633128005304980ca8e4e5931fd5,
+        type: 3}
+    - target: {fileID: 195231619, guid: cb34f8b053ff2fc46ac0f8978e018cc6, type: 3}
+      propertyPath: action1Cooldown
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 195231619, guid: cb34f8b053ff2fc46ac0f8978e018cc6, type: 3}
+      propertyPath: action2Cooldown
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2248740401292734371, guid: cb34f8b053ff2fc46ac0f8978e018cc6,
         type: 3}
       propertyPath: m_LocalPosition.x
