@@ -358,6 +358,11 @@ public class Player : MonoBehaviour
             manager.changeHealth(-damage);
             invincible = true;
             timeInvincible = invincibilityTime;
+            animator.Play("Hurt");
+            walkState = false;
+            slideTime = maxSlideTime - 0.2f;
+            if (spriterender.flipX == true) myRigidbody.velocity = new Vector2(3, 0);
+            else myRigidbody.velocity = new Vector2(-3, 0);
         }
     }
 

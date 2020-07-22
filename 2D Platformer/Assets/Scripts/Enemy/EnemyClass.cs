@@ -4,44 +4,51 @@ using UnityEngine;
 
 public class EnemyClass : MonoBehaviour
 {
+    private SpriteRenderer spriterender;
+
     public int health;
     public int damageOnTouch = 2;
 
     public float movementSpeed;
     float originalMoveSpeed;
-
-    float timeStunned = 0.3f; //The amount of time enemy is stunned when hit. 
+    bool stunned;
+    float stunTime = 0.3f;
+    float timeStunned;
+    float timeBlinked = 0.07f;
 
     public GameObject deathAnim;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        callOnStart();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        callOnUpdate();
     }
 
     //Probably need to create a struct that contains information about the enemy, such as start health and position, so it can be reset of the player dies and loads a checkpoint.
     public void callOnStart()
     {
-        deathAnim.SetActive(false);
         originalMoveSpeed = movementSpeed;
+        spriterender = GetComponent<SpriteRenderer>();
     }
 
     public void callOnUpdate()
     {
-        if(movementSpeed != originalMoveSpeed)
+        if(stunned)
         {
             timeStunned -= Time.deltaTime;
-            if(timeStunned < 0)
+            if (timeStunned <= 0)
             {
-                movementSpeed = originalMoveSpeed;                
+                movementSpeed = originalMoveSpeed;
             }
+            else if (spriterender.enabled == false && timeStunned <= stunTime - timeBlinked) spriterender.enabled = true; 
+
+            
         }
     }
 
@@ -56,8 +63,10 @@ public class EnemyClass : MonoBehaviour
         }
         else
         {
+            stunned = true;
             movementSpeed = 0; //Stunning the enemy. Set back to normal after a while.
-            timeStunned = 0.3f; //Remember to update stun time here if changed above.
+            timeStunned = stunTime; //Remember to update stun time here if changed above.
+            spriterender.enabled = false;
         }
     }
 
