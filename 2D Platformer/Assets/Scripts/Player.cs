@@ -66,9 +66,14 @@ public class Player : MonoBehaviour
     float action1Time;
     public float action2Cooldown;
     float action2Time;
+
+    //Invincibility and spriteflicker
     bool invincible;
     float invincibilityTime = 1f; //How long the player can't take damage after having taken damage. Safety time, so your health isn't just drained.
     float timeInvincible;
+    float blinkTime = 0.07f; //Lower this to make the character flicker faster when hit.
+    float timeBlinked;
+
 
     public bool isGrounded;
     public float vertical;
@@ -148,11 +153,25 @@ public class Player : MonoBehaviour
         //Limiting max falling speed
         if (myRigidbody.velocity.y < -20) myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, -20f);
 
-        //Incinvibility
+        //Incinvibility. Also sprite flickering.
         if (invincible)
         {
             timeInvincible -= Time.deltaTime;
-            if (timeInvincible <= 0) invincible = false;
+            if (timeInvincible <= 0)
+            {
+                invincible = false;
+                spriterender.enabled = true;
+            }
+            else
+            {
+                timeBlinked -= Time.deltaTime;
+                if(timeBlinked <= 0)
+                {
+                    if (spriterender.enabled == true) spriterender.enabled = false;
+                    else spriterender.enabled = true;
+                    timeBlinked = blinkTime;
+                }
+            }
         }
 
         animationHandler();

@@ -25,11 +25,11 @@ public class RoboTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (onEnterChange != -1) controller.changeAnimation(onEnterChange);
+        if (collision.tag == "Player" && onEnterChange != -1) controller.changeAnimation(onEnterChange);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (onExitChange != -1) controller.changeAnimation(onExitChange);
+        if (collision.tag == "Player" && onExitChange != -1) controller.changeAnimation(onExitChange);
     }
 }
