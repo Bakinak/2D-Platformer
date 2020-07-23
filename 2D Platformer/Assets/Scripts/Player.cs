@@ -66,6 +66,8 @@ public class Player : MonoBehaviour
     float action1Time;
     public float action2Cooldown;
     float action2Time;
+    float action1Buffer;
+    float action2Buffer;
 
     //Invincibility and spriteflicker
     bool invincible;
@@ -332,11 +334,15 @@ public class Player : MonoBehaviour
     }
 
 
-    void attacks() //Make it so that this works in same way as jumping, with a buffer that triggers an attack if you press it slightly before it is ready.
+    void attacks()
     {
+        if (Input.GetButtonDown("Fire2")) action1Buffer = jumpBufferLength;
+
+        if (Input.GetButtonDown("Fire3")) action2Buffer = jumpBufferLength;
+
         if (walkState || isGrounded)
         {
-            if (Input.GetButtonDown("Fire2") && action1Time <= 0)
+            if (action1Buffer > 0 && action1Time <= 0)
             {
                 action1(spriterender.flipX);
                 action1Time = action1Cooldown;
@@ -344,7 +350,7 @@ public class Player : MonoBehaviour
                 animator.Play("Attack");
             }
 
-            if (Input.GetButtonDown("Fire3") && action2Time <= 0)
+            if (action2Buffer > 0 && action2Time <= 0)
             {
                 action2(spriterender.flipX);
                 action2Time = action2Cooldown;
@@ -353,8 +359,10 @@ public class Player : MonoBehaviour
             }
         }
 
-        if(action1Time > 0) action1Time -= Time.deltaTime;
-        if(action2Time > 0) action2Time -= Time.deltaTime;
+        if (action1Buffer >= 0) action1Buffer -= Time.deltaTime;
+        if (action2Buffer >= 0) action2Buffer -= Time.deltaTime;
+        if (action1Time > 0) action1Time -= Time.deltaTime;
+        if (action2Time > 0) action2Time -= Time.deltaTime;
 
     }
 
