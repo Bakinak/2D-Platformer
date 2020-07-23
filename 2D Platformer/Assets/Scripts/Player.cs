@@ -334,16 +334,23 @@ public class Player : MonoBehaviour
 
     void attacks() //Make it so that this works in same way as jumping, with a buffer that triggers an attack if you press it slightly before it is ready.
     {
-        if (Input.GetButtonDown("Fire2") && action1Time <= 0)
+        if (walkState || isGrounded)
         {
-            action1(spriterender.flipX);
-            action1Time = action1Cooldown;
-        }
+            if (Input.GetButtonDown("Fire2") && action1Time <= 0)
+            {
+                action1(spriterender.flipX);
+                action1Time = action1Cooldown;
+                walkState = true;
+                animator.Play("Attack");
+            }
 
-        if (Input.GetButtonDown("Fire3") && action2Time <= 0)
-        {
-            action2(spriterender.flipX);
-            action2Time = action2Cooldown;
+            if (Input.GetButtonDown("Fire3") && action2Time <= 0)
+            {
+                action2(spriterender.flipX);
+                action2Time = action2Cooldown;
+                walkState = true;
+                animator.Play("SpecialAttack");
+            }
         }
 
         if(action1Time > 0) action1Time -= Time.deltaTime;
