@@ -18,6 +18,10 @@ public class EnemyClass : MonoBehaviour
 
     public GameObject deathAnim;
 
+    //Respawning?
+    int originalHealth;
+    Transform originalTransform;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +39,8 @@ public class EnemyClass : MonoBehaviour
     {
         originalMoveSpeed = movementSpeed;
         spriterender = GetComponent<SpriteRenderer>();
+        originalTransform = transform;
+        originalHealth = health;
     }
 
     public void callOnUpdate()
@@ -69,6 +75,18 @@ public class EnemyClass : MonoBehaviour
             spriterender.enabled = false;
         }
     }
+
+    public void respawn()
+    {
+        gameObject.SetActive(true);
+        health = originalHealth;
+        transform.position = originalTransform.position;
+        transform.rotation = originalTransform.rotation;
+        timeStunned = 0;
+        movementSpeed = originalMoveSpeed;
+        if (gameObject.GetComponent<Rigidbody2D>() != null) gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+    }
+
 
     private void OnTriggerStay2D(Collider2D collision)
     {
