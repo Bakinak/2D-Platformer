@@ -17,7 +17,18 @@ public class myGameManager : MonoBehaviour
     [SerializeField] Sprite[] healthSprites;
 #pragma warning restore
 
-    GameObject[] levelEnemies;
+
+    //Checkpoints and respawning player
+    //Enemies
+    public GameObject[] levelEnemies;
+
+    //Checkpoints and player
+    GameObject player;
+    Vector3 playerSpawnPoint;
+    GameObject currentCheckPoint;
+    //Camera Information at Check Point Activation.
+    public GameObject myCamera;
+    Vector3 originalCameraPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +37,12 @@ public class myGameManager : MonoBehaviour
         healthBar.GetComponent<Image>().sprite = healthSprites[playerHealth];
         currentHealthDisplayed = playerHealth;
         levelEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerSpawnPoint = player.transform.position;
+
+        myCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        originalCameraPosition = myCamera.transform.position;
     }
 
     // Update is called once per frame
@@ -59,7 +76,11 @@ public class myGameManager : MonoBehaviour
     {
         playerHealth += healthChange;
         if (playerHealth > 15) playerHealth = 16;
-        else if (playerHealth < 1) playerHealth = 0;
+        else if (playerHealth < 1)
+        {
+            playerHealth = 0;
+            playerDeath();
+        }
         //healthBar.GetComponent<Image>().sprite = healthSprites[playerHealth];
     }
 
@@ -72,11 +93,33 @@ public class myGameManager : MonoBehaviour
     Moving objects reset their position.*/
     void playerDeath()
     {
-        playerHealth = 16;
-        for(int i = 0; i<levelEnemies.Length; i++)
+        //Respawning Enemies
+        for (int i = 0; i<levelEnemies.Length; i++) 
         {
             levelEnemies[i].GetComponent<EnemyClass>().respawn();
         }
+
+        //Resetting Player and placing them at checkpoint
+        playerHealth = 16;
+        player.transform.position = playerSpawnPoint;
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+        Debug.Log("Player Died");
+
+        //Do something with the camera.
+        if (currentCheckPoint == null) GetComponent<Camera>().transform.position = originalCameraPosition;
+    }
+
+    public void updateCheckPoint(GameObject newCheckPoint)
+    {
+        if(currentCheckPoint != null)
+        {
+            currentCheckPoint.GetComponent<CheckPoint>().activateOrInactivate(false);
+        }
+        currentCheckPoint = newCheckPoint;
+        playerSpawnPoint = currentCheckPoint.transform.position;
+
+        currentCheckPoint.GetComponent<CheckPoint>().activateOrInactivate(true);
     }
 
 }
