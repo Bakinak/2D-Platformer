@@ -103,12 +103,12 @@ public class myGameManager : MonoBehaviour
         {
             levelEnemies[i].GetComponent<EnemyClass>().respawn();
         }
-
+        //Pickup Respawn
         for (int i = 0; i < levelPickUps.Length; i++)
         {
             levelPickUps[i].SetActive(true);
         }
-
+        //Resetting moving platforms
         for (int i = 0; i < movingPlatforms.Length; i++)
         {
             //Reset their position. All moving platforms must come from one class that has a function that resets their position.
