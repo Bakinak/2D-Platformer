@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7605165005830356553}
   m_Layer: 0
   m_Name: smallHealthPickUp
-  m_TagString: Untagged
+  m_TagString: pickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2004029543
-  m_SortingLayer: -3
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_Sprite: {fileID: -5911740174649994331, guid: f9717fed002cd594c96e8730d74587af,
     type: 3}

@@ -370,7 +370,6 @@ public class Player : MonoBehaviour
     {
         if (!invincible)
         {
-            manager.changeHealth(-damage);
             invincible = true;
             timeInvincible = invincibilityTime;
             animator.Play("Hurt");
@@ -378,12 +377,22 @@ public class Player : MonoBehaviour
             slideTime = maxSlideTime - 0.2f;
             if (spriterender.flipX == true) myRigidbody.velocity = new Vector2(3, 0);
             else myRigidbody.velocity = new Vector2(-3, 0);
+            manager.changeHealth(-damage);
         }
     }
 
     public void gainHealth(int heal) //Play healing sound also. Unless that is done in the manager every time health ticks up.
     {
         manager.changeHealth(heal);
+    }
+
+    //Called from manager when player dies. Should reset some values, like cooldown, invincibility, sliding, and so on.
+    public void died()
+    {
+        slideTime = maxSlideTime;
+        timeInvincible = 0;
+        action1Time = 0;
+        action2Time = 0;
     }
 
     public virtual void action1(bool direction) //Direction used to know which way attack goes... obviously. But the sprite renderer is not available to each character, so it is sent here.

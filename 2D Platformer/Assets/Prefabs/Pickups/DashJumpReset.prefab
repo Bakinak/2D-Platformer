@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5749245100094935346}
   m_Layer: 0
   m_Name: DashJumpReset
-  m_TagString: Untagged
+  m_TagString: pickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2004029543
-  m_SortingLayer: -3
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_Sprite: {fileID: -8576419132406968826, guid: 2eaa054a66e90f94b9c78c72062c0257,
     type: 3}

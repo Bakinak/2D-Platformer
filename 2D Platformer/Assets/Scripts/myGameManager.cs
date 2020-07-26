@@ -19,8 +19,10 @@ public class myGameManager : MonoBehaviour
 
 
     //Checkpoints and respawning player
-    //Enemies
+    //Enemies, pickUps, moving platforms.
     public GameObject[] levelEnemies;
+    public GameObject[] levelPickUps;
+    public GameObject[] movingPlatforms;
 
     //Checkpoints and player
     GameObject player;
@@ -36,7 +38,10 @@ public class myGameManager : MonoBehaviour
         playerHealth = 16;
         healthBar.GetComponent<Image>().sprite = healthSprites[playerHealth];
         currentHealthDisplayed = playerHealth;
+        //Finding things we need to respawn on player death.
         levelEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        levelPickUps = GameObject.FindGameObjectsWithTag("pickUp");
+        movingPlatforms = GameObject.FindGameObjectsWithTag("movingPlatform");
 
         player = GameObject.FindGameObjectWithTag("Player");
         playerSpawnPoint = player.transform.position;
@@ -99,15 +104,25 @@ public class myGameManager : MonoBehaviour
             levelEnemies[i].GetComponent<EnemyClass>().respawn();
         }
 
+        for (int i = 0; i < levelPickUps.Length; i++)
+        {
+            levelPickUps[i].SetActive(true);
+        }
+
+        for (int i = 0; i < movingPlatforms.Length; i++)
+        {
+            //Reset their position. All moving platforms must come from one class that has a function that resets their position.
+        }
+
         //Resetting Player and placing them at checkpoint
         playerHealth = 16;
         player.transform.position = playerSpawnPoint;
         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
+        player.GetComponent<Player>().died();
         Debug.Log("Player Died");
 
         //Do something with the camera.
-        if (currentCheckPoint == null) GetComponent<Camera>().transform.position = originalCameraPosition;
+        if (currentCheckPoint == null) myCamera.transform.position = originalCameraPosition;
     }
 
     public void updateCheckPoint(GameObject newCheckPoint)
