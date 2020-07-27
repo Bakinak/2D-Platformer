@@ -16,7 +16,8 @@ public class myGameManager : MonoBehaviour
     [SerializeField] GameObject healthBar;
     [SerializeField] Sprite[] healthSprites;
 #pragma warning restore
-
+    //UI
+    public UIcontroller ui;
 
     //Checkpoints and respawning player
     //Enemies, pickUps, moving platforms.
@@ -35,6 +36,7 @@ public class myGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(ui.fadeToBlack(true));
         playerHealth = 16;
         healthBar.GetComponent<Image>().sprite = healthSprites[playerHealth];
         currentHealthDisplayed = playerHealth;
@@ -48,6 +50,7 @@ public class myGameManager : MonoBehaviour
 
         myCamera = GameObject.FindGameObjectWithTag("MainCamera");
         originalCameraPosition = myCamera.transform.position;
+
     }
 
     // Update is called once per frame
