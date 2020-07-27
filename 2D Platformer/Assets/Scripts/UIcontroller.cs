@@ -36,6 +36,8 @@ public class UIcontroller : MonoBehaviour
                 blackScreen.GetComponent<Image>().color = objectColor;
                 yield return null;
             }
+            //Call respawning function in my game manager?
+            GameObject.Find("Manager").GetComponent<myGameManager>().playerDeath();
         }
         else //Fade from black
         {

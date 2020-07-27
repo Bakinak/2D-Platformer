@@ -36,7 +36,7 @@ public class myGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(ui.fadeToBlack(true));
+        //StartCoroutine(ui.fadeToBlack(true));
         playerHealth = 16;
         healthBar.GetComponent<Image>().sprite = healthSprites[playerHealth];
         currentHealthDisplayed = playerHealth;
@@ -87,7 +87,10 @@ public class myGameManager : MonoBehaviour
         else if (playerHealth < 1)
         {
             playerHealth = 0;
-            playerDeath();
+            //Spawn death animation at player position;
+            player.SetActive(false);
+            StartCoroutine(ui.fadeToBlack(true, 2));
+            //playerDeath();
         }
         //healthBar.GetComponent<Image>().sprite = healthSprites[playerHealth];
     }
@@ -99,7 +102,7 @@ public class myGameManager : MonoBehaviour
     Camera moves to player, and keeps the booleans and clamps it had when the player reached said checkpoint, else we might fuck up later.
     Pickups respawn.
     Moving objects reset their position.*/
-    void playerDeath()
+    public void playerDeath()
     {
         //Respawning Enemies
         for (int i = 0; i<levelEnemies.Length; i++) 
@@ -119,6 +122,7 @@ public class myGameManager : MonoBehaviour
 
         //Resetting Player and placing them at checkpoint
         playerHealth = 16;
+        player.SetActive(true);
         player.transform.position = playerSpawnPoint;
         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         player.GetComponent<Player>().died();
@@ -126,6 +130,8 @@ public class myGameManager : MonoBehaviour
 
         //Do something with the camera.
         if (currentCheckPoint == null) myCamera.transform.position = originalCameraPosition;
+
+        StartCoroutine(ui.fadeToBlack(false));
     }
 
     public void updateCheckPoint(GameObject newCheckPoint)
