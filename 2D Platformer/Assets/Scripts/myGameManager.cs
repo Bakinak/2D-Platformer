@@ -27,10 +27,12 @@ public class myGameManager : MonoBehaviour
 
     //Checkpoints and player
     GameObject player;
+    Player playerScript;
     Vector3 playerSpawnPoint;
     GameObject currentCheckPoint;
     //Camera Information at Check Point Activation.
     public GameObject myCamera;
+    cameraScript camScript;
     Vector3 originalCameraPosition;
 
     // Start is called before the first frame update
@@ -46,9 +48,11 @@ public class myGameManager : MonoBehaviour
         movingPlatforms = GameObject.FindGameObjectsWithTag("movingPlatform");
 
         player = GameObject.FindGameObjectWithTag("Player");
+        playerScript = player.GetComponent<Player>();
         playerSpawnPoint = player.transform.position;
 
         myCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        camScript = myCamera.GetComponent<cameraScript>();
         originalCameraPosition = myCamera.transform.position;
 
     }
@@ -146,4 +150,10 @@ public class myGameManager : MonoBehaviour
         currentCheckPoint.GetComponent<CheckPoint>().activateOrInactivate(true);
     }
 
+    //Camera Behaviour. Should call functions in the camera script probably, but may need to go through here first.
+    public void screenMove(Vector2 pos)
+    {
+        playerScript.inControl = false;
+        camScript.moveToPoint(pos);
+    }
 }

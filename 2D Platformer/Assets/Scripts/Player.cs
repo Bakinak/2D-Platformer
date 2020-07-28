@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public bool inControl = true;
 
     private Rigidbody2D myRigidbody;
     private BoxCollider2D myBoxCollider;
@@ -89,13 +90,16 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        putThisInUpdate();
+        putThisInUpdate();  
     }
 
 
     void FixedUpdate()
     {
-        putThisInFixedUpdate();
+        if (inControl)
+        {
+            putThisInFixedUpdate();
+        }
     }
 
     public void putThisInStart()
@@ -135,9 +139,12 @@ public class Player : MonoBehaviour
         }
 
         //Functions and stuff
-        jump();
-        slide();
-        attacks();
+        if (inControl)
+        {
+            jump();
+            slide();
+            attacks();
+        }
 
         /*if (adaptiveCamera)
         {

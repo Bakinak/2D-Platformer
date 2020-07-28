@@ -38,4 +38,24 @@ public class cameraScript : MonoBehaviour
             } else  transform.position = new Vector3(transform.position.x, target.transform.position.y, -50);
         }
     }
+
+    public void moveToPoint(Vector2 pos)
+    {
+        followX = false;
+        followY = false;
+
+        StartCoroutine(moveCamera(pos));
+    }
+
+    IEnumerator moveCamera(Vector2 newPos)
+    {
+
+        while (transform.position.x != newPos.x && transform.position.y != newPos.y)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, newPos, 2*Time.deltaTime);
+            transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+        }
+        yield return null;
+    }
+
 }
