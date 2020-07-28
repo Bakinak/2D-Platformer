@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EnemyClass : MonoBehaviour
 {
-    private SpriteRenderer spriterender;
+    public SpriteRenderer spriterender;
+    public Rigidbody2D myrigidbody;
+    public Animator animator;
 
     public int health;
     public int damageOnTouch = 2;
@@ -12,7 +14,7 @@ public class EnemyClass : MonoBehaviour
     public float movementSpeed;
     float originalMoveSpeed;
     bool stunned;
-    float stunTime = 0.3f;
+    float stunTime = 0.1f;
     float timeStunned;
     float timeBlinked = 0.07f;
 
@@ -42,6 +44,8 @@ public class EnemyClass : MonoBehaviour
     {
         originalMoveSpeed = movementSpeed;
         spriterender = GetComponent<SpriteRenderer>();
+        if (GetComponent<Rigidbody2D>() != null) myrigidbody = GetComponent<Rigidbody2D>();
+        if (GetComponent<Animator>() != null) animator = GetComponent<Animator>();
         originalTransform = transform;
         originalHealth = health;
         layer = LayerMask.GetMask("Player");
@@ -55,11 +59,13 @@ public class EnemyClass : MonoBehaviour
             timeStunned -= Time.deltaTime;
             if (timeStunned <= 0)
             {
-                movementSpeed = originalMoveSpeed;
+                //movementSpeed = originalMoveSpeed;
             }
-            else if (spriterender.enabled == false && timeStunned <= stunTime - timeBlinked) spriterender.enabled = true; 
+            if (spriterender.enabled == false && timeStunned <= stunTime - timeBlinked) spriterender.enabled = true; 
 
         }
+
+        if (spriterender.enabled == false && timeStunned <= stunTime - timeBlinked) spriterender.enabled = true;
 
         collisionDamage();
     }
@@ -76,8 +82,7 @@ public class EnemyClass : MonoBehaviour
         else
         {
             stunned = true;
-            movementSpeed = 0; //Stunning the enemy. Set back to normal after a while.
-            timeStunned = stunTime; //Remember to update stun time here if changed above.
+            timeStunned = stunTime; 
             spriterender.enabled = false;
         }
     }
