@@ -5,6 +5,7 @@ using UnityEngine;
 public class cameraTrigger : MonoBehaviour
 {
     public Transform target;
+    public bool bossDoor;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,7 @@ public class cameraTrigger : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            GameObject.Find("Manager").GetComponent<myGameManager>().screenMove(target.position);
+            GameObject.Find("Manager").GetComponent<myGameManager>().screenMove(target, bossDoor);
         }
     }
 }

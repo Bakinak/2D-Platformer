@@ -151,9 +151,9 @@ public class myGameManager : MonoBehaviour
     }
 
     //Camera Behaviour. Should call functions in the camera script probably, but may need to go through here first.
-    public void screenMove(Vector2 pos)
+    public void screenMove(Transform pos, bool boss)
     {
         playerScript.inControl = false;
-        camScript.moveToPoint(pos);
+        camScript.moveToPoint(pos, boss);
     }
 }

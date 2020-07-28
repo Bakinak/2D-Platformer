@@ -9,6 +9,8 @@ public class cameraScript : MonoBehaviour
 
     public bool followY = true;
     public bool followX = true;
+    public bool screenMoveSlow;
+    bool bossActivate;
 
     public Transform xAxisClampL, xAxisClampR, yAxisClampT, yAxisClampB;
 
@@ -21,6 +23,10 @@ public class cameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (screenMoveSlow)
+        {
+            slowlyMoveTowards();
+        }
         if (followX)
         {
             if (xAxisClampL != null && xAxisClampR != null) {
@@ -39,23 +45,32 @@ public class cameraScript : MonoBehaviour
         }
     }
 
-    public void moveToPoint(Vector2 pos)
+    public void moveToPoint(Transform pos, bool bossDoor)
     {
         followX = false;
         followY = false;
+        bossActivate = bossDoor;
+        target = pos;
+        screenMoveSlow = true;
 
-        StartCoroutine(moveCamera(pos));
     }
 
-    IEnumerator moveCamera(Vector2 newPos)
+    void slowlyMoveTowards()
     {
-
-        while (transform.position.x != newPos.x && transform.position.y != newPos.y)
+        if (transform.position.x != target.position.x && transform.position.y != target.position.y)
         {
-            transform.position = Vector2.MoveTowards(transform.position, newPos, 2*Time.deltaTime);
-            transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+            transform.position = Vector2.MoveTowards(transform.position, target.position, 10 * Time.deltaTime);
+            transform.position = new Vector3(transform.position.x, transform.position.y, -50);
         }
-        yield return null;
+        else
+        {
+            screenMoveSlow = false;
+            if (bossActivate)
+            {
+                //Activate boss or something here, by calling a method in game manager.
+            }
+
+        }
     }
 
 }

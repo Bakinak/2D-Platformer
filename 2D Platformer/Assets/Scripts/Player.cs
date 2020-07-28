@@ -96,10 +96,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (inControl)
-        {
-            putThisInFixedUpdate();
-        }
+        putThisInFixedUpdate();
     }
 
     public void putThisInStart()
@@ -188,8 +185,10 @@ public class Player : MonoBehaviour
 
     public void putThisInFixedUpdate()
     {
+
         horizontal = Input.GetAxis("Horizontal");
         HandleMovement(horizontal);
+       
     }
 
     void HandleMovement(float horizontal)
@@ -197,11 +196,13 @@ public class Player : MonoBehaviour
         if (walkState == true)
         {
             myRigidbody.velocity /= new Vector2(1.1f, 1);
-            if (Mathf.Abs(myRigidbody.velocity.x) <= movementSpeed)
+            if(inControl)
             {
-                myRigidbody.velocity += new Vector2(horizontal * movementSpeed * Time.deltaTime, 0); //x= -1, y = 0;
+                if (Mathf.Abs(myRigidbody.velocity.x) <= movementSpeed)
+                {
+                    myRigidbody.velocity += new Vector2(horizontal * movementSpeed * Time.deltaTime, 0); //x= -1, y = 0;
+                }
             }
-
             if (Mathf.Abs(Input.GetAxis("Horizontal")) == 0 && Mathf.Abs(myRigidbody.velocity.x) < 1)
             {
                 myRigidbody.velocity = new Vector2(0, myRigidbody.velocity.y);
