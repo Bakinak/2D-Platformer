@@ -20,7 +20,7 @@ public class EnemyClass : MonoBehaviour
 
     LayerMask layer;
     BoxCollider2D myCollider;
-    public Collider2D playerToDamage;
+    Collider2D playerToDamage;
     //Respawning?
     int originalHealth;
     Transform originalTransform;
