@@ -18,6 +18,9 @@ public class EnemyClass : MonoBehaviour
 
     public GameObject deathAnim;
 
+    LayerMask layer;
+    BoxCollider2D myCollider;
+    public Collider2D playerToDamage;
     //Respawning?
     int originalHealth;
     Transform originalTransform;
@@ -41,6 +44,8 @@ public class EnemyClass : MonoBehaviour
         spriterender = GetComponent<SpriteRenderer>();
         originalTransform = transform;
         originalHealth = health;
+        layer = LayerMask.GetMask("Player");
+        myCollider = GetComponent<BoxCollider2D>();
     }
 
     public void callOnUpdate()
@@ -54,8 +59,9 @@ public class EnemyClass : MonoBehaviour
             }
             else if (spriterender.enabled == false && timeStunned <= stunTime - timeBlinked) spriterender.enabled = true; 
 
-            
         }
+
+        collisionDamage();
     }
 
     public virtual void takeDamage(int damage)
@@ -87,13 +93,11 @@ public class EnemyClass : MonoBehaviour
         if (gameObject.GetComponent<Rigidbody2D>() != null) gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
     }
 
-
-    private void OnTriggerStay2D(Collider2D collision)
+    void collisionDamage() //Checking whether we can damage a player. All enemies must have boxcolliders 2D for this work in its current state.
     {
-        if(collision.gameObject.tag == "Player")
-        {
-            collision.GetComponent<Player>().takeDamage(damageOnTouch);
-        }
+        playerToDamage = Physics2D.OverlapArea(new Vector2(transform.position.x - myCollider.size.x / 2, transform.position.y - myCollider.size.y / 2), 
+            new Vector2(transform.position.x + myCollider.size.x / 2, transform.position.y + myCollider.size.y / 2), layer);
+        if (playerToDamage != null) playerToDamage.GetComponent<Player>().takeDamage(damageOnTouch);
     }
 
 }

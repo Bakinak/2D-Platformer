@@ -378,6 +378,7 @@ public class Player : MonoBehaviour
     {
         if (!invincible)
         {
+            
             invincible = true;
             timeInvincible = invincibilityTime;
             animator.Play("Hurt");

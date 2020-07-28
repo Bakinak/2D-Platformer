@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3885333444590443439}
   - component: {fileID: 3885333444590443438}
   - component: {fileID: 195231619}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mikeNew
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -202,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd62b83d93836dd4e81b4849163f3866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inControl: 1
   groundCheckA: {fileID: 3885333444401175728}
   groundCheckB: {fileID: 3885333444129144701}
   ground:
@@ -238,6 +239,7 @@ MonoBehaviour:
   damage: 3
   swordSlash: {fileID: 3771806071352309463, guid: d40c633128005304980ca8e4e5931fd5,
     type: 3}
+  flipSlash: 0
 --- !u!1 &3885333444129144700
 GameObject:
   m_ObjectHideFlags: 0
