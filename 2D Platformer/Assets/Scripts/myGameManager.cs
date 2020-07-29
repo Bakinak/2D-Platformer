@@ -15,7 +15,11 @@ public class myGameManager : MonoBehaviour
 #pragma warning disable 0649
     [SerializeField] GameObject healthBar;
     [SerializeField] Sprite[] healthSprites;
+    [SerializeField] GameObject bossHealthBar;
+    [SerializeField] Sprite[] bossHealthSprites;
 #pragma warning restore
+
+
     //UI
     public UIcontroller ui;
 
@@ -35,12 +39,15 @@ public class myGameManager : MonoBehaviour
     cameraScript camScript;
     Vector3 originalCameraPosition;
 
+    public GameObject boss;
+
     // Start is called before the first frame update
     void Start()
     {
         //StartCoroutine(ui.fadeToBlack(true));
         playerHealth = 16;
         healthBar.GetComponent<Image>().sprite = healthSprites[playerHealth];
+        
         currentHealthDisplayed = playerHealth;
         //Finding things we need to respawn on player death.
         levelEnemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -81,6 +88,8 @@ public class myGameManager : MonoBehaviour
                 }
             }
         }
+
+        
 
     }
 
@@ -153,7 +162,33 @@ public class myGameManager : MonoBehaviour
     //Camera Behaviour. Should call functions in the camera script probably, but may need to go through here first.
     public void screenMove(Transform pos, bool boss)
     {
-        //playerScript.inControl = false;
+        playerScript.inControl = false;
         camScript.moveToPoint(pos, boss);
     }
+
+    public void activateBoss()
+    {
+        StartCoroutine(setupBossEncounter());
+
+    }
+
+    IEnumerator setupBossEncounter()
+    {
+        bossHealthBar.SetActive(true);
+
+        for (int i = 0; i < bossHealthSprites.Length; i++)
+        {
+            bossHealthBar.GetComponent<Image>().sprite = bossHealthSprites[i];
+            yield return new WaitForSeconds(0.1f);
+
+        }
+        playerScript.inControl = true;
+        boss.GetComponent<BossClass>().bossActive = true;
+    }
+
+    public void bossTakeDamage(int damage)
+    {
+        //Update boss healthbar.
+    }
+
 }

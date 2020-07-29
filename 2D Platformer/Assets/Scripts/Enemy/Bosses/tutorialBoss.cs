@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class tutorialBoss : EnemyClass
+public class tutorialBoss : BossClass
 {
-    public bool active;
-
     float checkDistance = 1;
 
     public bool hit;
@@ -19,7 +17,7 @@ public class tutorialBoss : EnemyClass
     // Update is called once per frame
     void Update()
     {
-        if (active)
+        if (bossActive)
         {
             callOnUpdate();
             moveBackAndForth();
@@ -67,11 +65,9 @@ public class tutorialBoss : EnemyClass
         hit = true;
 
         myrigidbody.velocity = new Vector2(myrigidbody.velocity.x, 20);
-        Debug.Log("Go Right");
 
-
-        if (movementSpeed < 0) movementSpeed -= 0.7f;
-        else movementSpeed += 0.7f;
+        if (movementSpeed < 0) movementSpeed -= 1f;
+        else movementSpeed += 1f;
 
     }
 

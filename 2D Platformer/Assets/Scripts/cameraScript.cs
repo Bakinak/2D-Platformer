@@ -6,6 +6,7 @@ public class cameraScript : MonoBehaviour
 {
 
     public Transform target;
+    myGameManager manager;
 
     public bool followY = true;
     public bool followX = true;
@@ -17,7 +18,7 @@ public class cameraScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        manager = GameObject.Find("Manager").GetComponent<myGameManager>();
     }
 
     // Update is called once per frame
@@ -67,6 +68,7 @@ public class cameraScript : MonoBehaviour
             screenMoveSlow = false;
             if (bossActivate)
             {
+                manager.activateBoss();
                 //Activate boss or something here, by calling a method in game manager.
             }
 

@@ -40,7 +40,7 @@ public class EnemyClass : MonoBehaviour
     }
 
     //Probably need to create a struct that contains information about the enemy, such as start health and position, so it can be reset of the player dies and loads a checkpoint.
-    public void callOnStart()
+    public virtual void callOnStart()
     {
         originalMoveSpeed = movementSpeed;
         spriterender = GetComponent<SpriteRenderer>();

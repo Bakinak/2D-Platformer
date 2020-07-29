@@ -1652,12 +1652,12 @@ MonoBehaviour:
   spriterender: {fileID: 0}
   myrigidbody: {fileID: 0}
   animator: {fileID: 0}
-  health: 20
+  health: 30
   damageOnTouch: 2
   movementSpeed: 4
   deathAnim: {fileID: 6948591422543004691, guid: 59c93886666d207459f624ca0b489958,
     type: 3}
-  active: 1
+  bossActive: 0
   hit: 0
 --- !u!4 &161892599 stripped
 Transform:
@@ -14546,7 +14546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 662701169}
-  bossDoor: 0
+  bossDoor: 1
 --- !u!61 &1723883535
 BoxCollider2D:
   m_ObjectHideFlags: 0
