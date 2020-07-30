@@ -15,6 +15,11 @@ public class cameraScript : MonoBehaviour
 
     public Transform xAxisClampL, xAxisClampR, yAxisClampT, yAxisClampB;
 
+    Transform saveXClampL, saveXClampR, saveYClampT, saveYClampB, saveTarget;
+    Vector3 savePosition;
+    bool saveFollowY, saveFollowX;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +78,32 @@ public class cameraScript : MonoBehaviour
             }
 
         }
+    }
+
+    public void saveCameraSettings()
+    {
+        saveXClampL = xAxisClampL;
+        saveXClampR = xAxisClampR;
+        saveYClampB = yAxisClampB;
+        saveYClampT = yAxisClampT;
+
+        savePosition = transform.position;
+        saveFollowX = followX;
+        saveFollowY = followY;
+        saveTarget = target;
+    }
+
+    public void resetPosition()
+    {
+        xAxisClampL = saveXClampL;
+        xAxisClampR = saveXClampR;
+        yAxisClampB = saveYClampB;
+        yAxisClampT = saveYClampT;
+
+        transform.position = savePosition;
+        followX = saveFollowX;
+        followY = saveFollowY;
+        target = saveTarget;
     }
 
 }

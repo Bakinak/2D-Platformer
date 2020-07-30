@@ -188,7 +188,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.5}
+  m_Size: {x: 0.9, y: 1.5}
   m_EdgeRadius: 0
 --- !u!114 &195231619
 MonoBehaviour:
@@ -224,8 +224,8 @@ MonoBehaviour:
   airDashAvailable: 0
   jumpingGrav: 1
   quickFallGrav: 1.4
-  action1Cooldown: 0.2
-  action2Cooldown: 0.2
+  action1Cooldown: 0.25
+  action2Cooldown: 0.25
   isGrounded: 0
   vertical: 0
   attackPos1: {fileID: 5324408373357116103}

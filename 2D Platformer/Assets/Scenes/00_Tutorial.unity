@@ -8544,36 +8544,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 195231619, guid: cb34f8b053ff2fc46ac0f8978e018cc6, type: 3}
-      propertyPath: damage
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 195231619, guid: cb34f8b053ff2fc46ac0f8978e018cc6, type: 3}
-      propertyPath: swordSlash
-      value: 
-      objectReference: {fileID: 3771806071352309463, guid: d40c633128005304980ca8e4e5931fd5,
-        type: 3}
-    - target: {fileID: 195231619, guid: cb34f8b053ff2fc46ac0f8978e018cc6, type: 3}
-      propertyPath: action1Cooldown
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 195231619, guid: cb34f8b053ff2fc46ac0f8978e018cc6, type: 3}
-      propertyPath: action2Cooldown
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 195231619, guid: cb34f8b053ff2fc46ac0f8978e018cc6, type: 3}
-      propertyPath: blinkTime
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 2248740401292734371, guid: cb34f8b053ff2fc46ac0f8978e018cc6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 141
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 2248740401292734371, guid: cb34f8b053ff2fc46ac0f8978e018cc6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 2248740401292734371, guid: cb34f8b053ff2fc46ac0f8978e018cc6,
         type: 3}
@@ -18146,20 +18125,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2837371714479794081, guid: 6bc17398d46b2f14fb5b7588f1809fc6,
-        type: 3}
-      propertyPath: health
-      value: 32
-      objectReference: {fileID: 0}
     - target: {fileID: 4553949252366535824, guid: 6bc17398d46b2f14fb5b7588f1809fc6,
         type: 3}
       propertyPath: m_Name
       value: blockEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 4553949252366535824, guid: 6bc17398d46b2f14fb5b7588f1809fc6,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8380546320289442908, guid: 6bc17398d46b2f14fb5b7588f1809fc6,
         type: 3}

@@ -153,6 +153,7 @@ public class myGameManager : MonoBehaviour
         //Do something with the camera.
         if (currentCheckPoint == null) myCamera.transform.position = originalCameraPosition;
 
+        camScript.resetPosition();
 
 
         StartCoroutine(ui.fadeToBlack(false));
@@ -166,7 +167,7 @@ public class myGameManager : MonoBehaviour
         }
         currentCheckPoint = newCheckPoint;
         playerSpawnPoint = currentCheckPoint.transform.position;
-
+        camScript.saveCameraSettings();
         currentCheckPoint.GetComponent<CheckPoint>().activateOrInactivate(true);
     }
 
