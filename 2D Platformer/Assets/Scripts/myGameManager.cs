@@ -18,7 +18,7 @@ public class myGameManager : MonoBehaviour
     [SerializeField] GameObject bossHealthBar;
     [SerializeField] Sprite[] bossHealthSprites;
 #pragma warning restore
-
+    
 
     //UI
     public UIcontroller ui;
@@ -39,7 +39,10 @@ public class myGameManager : MonoBehaviour
     cameraScript camScript;
     Vector3 originalCameraPosition;
 
-    public GameObject boss;
+    public GameObject boss; //Set on start in BossClass.
+    public int bossHealthSquare; //How much health the boss must lose before healthbar is updated. Value set in BossClass.
+    int bossHealthDisplayed;
+    int bossDamageTaken;
 
     // Start is called before the first frame update
     void Start()
@@ -117,6 +120,12 @@ public class myGameManager : MonoBehaviour
     Moving objects reset their position.*/
     public void playerDeath()
     {
+        if (boss.GetComponent<BossClass>().bossActive)
+        {
+            bossHealthBar.SetActive(false);
+            bossDamageTaken = 0;
+        }
+
         //Respawning Enemies
         for (int i = 0; i<levelEnemies.Length; i++) 
         {
@@ -143,6 +152,8 @@ public class myGameManager : MonoBehaviour
 
         //Do something with the camera.
         if (currentCheckPoint == null) myCamera.transform.position = originalCameraPosition;
+
+
 
         StartCoroutine(ui.fadeToBlack(false));
     }
@@ -182,13 +193,22 @@ public class myGameManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
 
         }
+        bossHealthDisplayed = 16;
+
         playerScript.inControl = true;
         boss.GetComponent<BossClass>().bossActive = true;
+
     }
 
     public void bossTakeDamage(int damage)
     {
-        //Update boss healthbar.
+        bossDamageTaken += damage;
+        while (bossDamageTaken >= bossHealthSquare)
+        {
+            bossHealthDisplayed -= 1;
+            if(bossHealthDisplayed >= 0) bossHealthBar.GetComponent<Image>().sprite = bossHealthSprites[bossHealthDisplayed];
+            bossDamageTaken -= bossHealthSquare;
+        }        
     }
 
 }

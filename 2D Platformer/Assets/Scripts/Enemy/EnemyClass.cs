@@ -25,7 +25,8 @@ public class EnemyClass : MonoBehaviour
     Collider2D playerToDamage;
     //Respawning?
     int originalHealth;
-    Transform originalTransform;
+    Vector3 originalPosition;
+    Vector3 originalRotation;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +47,8 @@ public class EnemyClass : MonoBehaviour
         spriterender = GetComponent<SpriteRenderer>();
         if (GetComponent<Rigidbody2D>() != null) myrigidbody = GetComponent<Rigidbody2D>();
         if (GetComponent<Animator>() != null) animator = GetComponent<Animator>();
-        originalTransform = transform;
+        originalPosition = transform.position;
+        originalRotation = transform.rotation.eulerAngles;
         originalHealth = health;
         layer = LayerMask.GetMask("Player");
         myCollider = GetComponent<BoxCollider2D>();
@@ -87,12 +89,12 @@ public class EnemyClass : MonoBehaviour
         }
     }
 
-    public void respawn()
+    public virtual void respawn()
     {
         gameObject.SetActive(true);
         health = originalHealth;
-        transform.position = originalTransform.position;
-        transform.rotation = originalTransform.rotation;
+        transform.position = originalPosition;
+        transform.rotation = Quaternion.Euler(originalRotation.x, originalRotation.y, originalRotation.z);
         timeStunned = 0;
         movementSpeed = originalMoveSpeed;
         if (gameObject.GetComponent<Rigidbody2D>() != null) gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;

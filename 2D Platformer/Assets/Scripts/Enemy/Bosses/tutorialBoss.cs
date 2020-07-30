@@ -5,13 +5,14 @@ using UnityEngine;
 public class tutorialBoss : BossClass
 {
     float checkDistance = 1;
-
+    float extraOriginalMoveSpeed;
     public bool hit;
 
     // Start is called before the first frame update
     void Start()
     {
         callOnStart();
+        extraOriginalMoveSpeed = movementSpeed;
     }
 
     // Update is called once per frame
@@ -69,6 +70,14 @@ public class tutorialBoss : BossClass
         if (movementSpeed < 0) movementSpeed -= 1f;
         else movementSpeed += 1f;
 
+    }
+
+    public override void respawn()
+    {
+        base.respawn();
+        movementSpeed = extraOriginalMoveSpeed;
+        if (checkDistance < 0) checkDistance *= -1;
+        if (!spriterender.flipX) spriterender.flipX = true;
     }
 
 }

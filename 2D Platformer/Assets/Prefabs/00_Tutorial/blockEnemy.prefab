@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2837371714479794081}
   m_Layer: 9
   m_Name: blockEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   spriterender: {fileID: 0}
   myrigidbody: {fileID: 0}
   animator: {fileID: 0}
-  health: 30
+  health: 32
   damageOnTouch: 2
   movementSpeed: 4
   deathAnim: {fileID: 6948591422543004691, guid: 59c93886666d207459f624ca0b489958,

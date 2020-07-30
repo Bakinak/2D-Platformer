@@ -21,8 +21,8 @@ public class BossClass : EnemyClass
     //This class should probably update the take damage function so it calls manager and updates boss health on UI.
     public override void takeDamage(int damage)
     {
-        base.takeDamage(damage);
         manager.bossTakeDamage(damage);
+        base.takeDamage(damage);        
     }
 
     public override void callOnStart()
@@ -30,5 +30,12 @@ public class BossClass : EnemyClass
         base.callOnStart();
         manager = GameObject.Find("Manager").GetComponent<myGameManager>();
         manager.boss = gameObject;
+        manager.bossHealthSquare = health / 16;
+    }
+
+    public override void respawn()
+    {
+        base.respawn();
+        bossActive = false;
     }
 }
