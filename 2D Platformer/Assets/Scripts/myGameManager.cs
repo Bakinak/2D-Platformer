@@ -163,7 +163,6 @@ public class myGameManager : MonoBehaviour
 
         //Do something with the camera.
         if (currentCheckPoint == null) myCamera.transform.position = originalCameraPosition;
-
         camScript.resetPosition();
 
 
