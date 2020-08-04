@@ -83,6 +83,8 @@ public class Player : MonoBehaviour
 
     float horizontal;
 
+    public GameObject deathAnim;
+
     void Start()
     {
         putThisInStart();
@@ -343,7 +345,7 @@ public class Player : MonoBehaviour
     {
         //jumpState = 1;
         doubleJumpAvailable = true;
-        airDashAvailable = true;
+        //airDashAvailable = true;
     }
 
 

@@ -228,6 +228,8 @@ MonoBehaviour:
   action2Cooldown: 0.25
   isGrounded: 0
   vertical: 0
+  deathAnim: {fileID: 8180590280627415883, guid: 8e091bcfbf8d429458566dc606b92f02,
+    type: 3}
   attackPos1: {fileID: 5324408373357116103}
   attackPos2: {fileID: 1130250390968519354}
   attackPos3: {fileID: 86374296421058789}

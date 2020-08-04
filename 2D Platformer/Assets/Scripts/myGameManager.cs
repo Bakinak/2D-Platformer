@@ -34,6 +34,7 @@ public class myGameManager : MonoBehaviour
     Player playerScript;
     Vector3 playerSpawnPoint;
     GameObject currentCheckPoint;
+
     //Camera Information at Check Point Activation.
     public GameObject myCamera;
     cameraScript camScript;
@@ -104,14 +105,24 @@ public class myGameManager : MonoBehaviour
         {
             playerHealth = 0;
             //Spawn death animation at player position;
+            Instantiate(player.GetComponent<Player>().deathAnim, player.transform.position, player.transform.rotation);
             player.SetActive(false);
-            StartCoroutine(ui.fadeToBlack(true, 2));
+            StartCoroutine(waitforDeathAnim());
             //playerDeath();
         }
         //healthBar.GetComponent<Image>().sprite = healthSprites[playerHealth];
     }
 
-
+    IEnumerator waitforDeathAnim()
+    {
+        float timevar = 0;
+        while (timevar < 1.6)
+        {
+            timevar += Time.deltaTime;
+            yield return null;
+        }
+        StartCoroutine(ui.fadeToBlack(true, 2));
+    }
     /*Function that should be called when player dies. What is gonna need to happen:
     Enemies respawn.
     Player respawns at checkpoint.

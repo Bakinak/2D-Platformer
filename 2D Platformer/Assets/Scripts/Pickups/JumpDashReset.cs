@@ -41,7 +41,7 @@ public class JumpDashReset : MonoBehaviour
 
      void action(GameObject target)
     {
-        if (!target.GetComponent<Player>().doubleJumpAvailable || !target.GetComponent<Player>().airDashAvailable)
+        if (!target.GetComponent<Player>().doubleJumpAvailable /*|| !target.GetComponent<Player>().airDashAvailable*/)
         {
             timePassed = respawnTime;
             animator.SetTrigger("Pop");
