@@ -122,7 +122,6 @@ public class Player : MonoBehaviour
         else //Everything we need to do when the player is grounded. Resetting things and such, for example.
         {
             resettingDashAndJump();
-
         }
 
         //Hangtime
@@ -195,6 +194,7 @@ public class Player : MonoBehaviour
     {
         if (walkState == true)
         {
+            jumpState = 1;
             myRigidbody.velocity /= new Vector2(1.1f, 1);
             if(inControl)
             {
@@ -250,6 +250,10 @@ public class Player : MonoBehaviour
                     myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
                     break;
 
+                case 2:
+                    myRigidbody.velocity = new Vector2(myRigidbody.velocity.x * 1.5f, jumpForce * 0.9f);
+                    break;
+
             }
             
         }
@@ -271,12 +275,12 @@ public class Player : MonoBehaviour
     void slide()
     {
         if(Input.GetButtonDown("Fire1"))
-        {
-            if (!isGrounded && airDashAvailable) //Air dash! Consider removing the wall touch parameter, probably not using it ever again.
+        { //Change these things to airdashAvailable if I again want to split the two into both being available in a single jump.
+            if (!isGrounded && doubleJumpAvailable) //Air dash! Consider removing the wall touch parameter, probably not using it ever again.
             {
                 if (horizontal < 0 || spriterender.flipX == true && horizontal == 0) myRigidbody.velocity = new Vector2(-airDashSpeed, jumpForce * airDashJumpForce);
                 else myRigidbody.velocity = new Vector2(airDashSpeed, jumpForce * airDashJumpForce);
-                airDashAvailable = false;
+                doubleJumpAvailable = false;
                 walkState = false;
                 slideTime = 0;
                 animator.Play("AirDash");
@@ -302,6 +306,7 @@ public class Player : MonoBehaviour
 
         if (walkState == false)
         {
+            jumpState = 2;
             slideTime += 1 * Time.deltaTime;
             if(slideTime >= maxSlideTime || Mathf.Abs(myRigidbody.velocity.x) == 0)
             {
@@ -336,7 +341,7 @@ public class Player : MonoBehaviour
 
     public void resettingDashAndJump()
     {
-        jumpState = 1;
+        //jumpState = 1;
         doubleJumpAvailable = true;
         airDashAvailable = true;
     }
