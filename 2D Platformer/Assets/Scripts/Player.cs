@@ -253,7 +253,7 @@ public class Player : MonoBehaviour
                     break;
 
                 case 2:
-                    myRigidbody.velocity = new Vector2(myRigidbody.velocity.x * 1.5f, jumpForce * 0.9f);
+                    myRigidbody.velocity = new Vector2(myRigidbody.velocity.x * 1.5f, jumpForce);
                     jumpState = 1;
                     break;
 
