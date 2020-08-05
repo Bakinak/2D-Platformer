@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Player : MonoBehaviour
+public class Player : soundClass
 {
     public bool inControl = true;
 
@@ -84,6 +84,15 @@ public class Player : MonoBehaviour
     float horizontal;
 
     public GameObject deathAnim;
+
+    //Sound
+#pragma warning disable 0649
+    [SerializeField] AudioClip jumpSound;
+    [SerializeField] AudioClip doubleJumpSound;
+    [SerializeField] AudioClip airdashSound;
+    [SerializeField] AudioClip slideSound;
+    [SerializeField] AudioClip hurtSound;
+#pragma warning restore
 
     void Start()
     {
@@ -224,6 +233,7 @@ public class Player : MonoBehaviour
                 myRigidbody.velocity = new Vector2(myRigidbody.velocity.x * doubleJumpSpeedImpact, jumpForce*doubleJumpForce);
                 doubleJumpAvailable = false; //Disable it after one.
                 animator.Play("DoubleJump");
+                playSound(doubleJumpSound);
             }
             else
             {
@@ -244,12 +254,13 @@ public class Player : MonoBehaviour
             hangCounter = hangTime;
             jumpBufferCounter = 0;
             myRigidbody.gravityScale = jumpingGrav;
+            playSound(jumpSound);
 
             switch (jumpState)
             {
                 //Normal Jump
                 case 1:
-                    myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
+                    myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);                    
                     break;
 
                 case 2:
@@ -287,6 +298,7 @@ public class Player : MonoBehaviour
                 walkState = false;
                 slideTime = 0;
                 animator.Play("AirDash");
+                playSound(airdashSound);
 
             }
             else {
@@ -304,6 +316,7 @@ public class Player : MonoBehaviour
             slideTime = 0;
             if (horizontal < 0 || spriterender.flipX == true && horizontal == 0) myRigidbody.velocity = new Vector2(-slideSpeedBoost, myRigidbody.velocity.y);
             else  myRigidbody.velocity = new Vector2(slideSpeedBoost, myRigidbody.velocity.y);
+            playSound(slideSound);
 
         }
 
@@ -385,8 +398,7 @@ public class Player : MonoBehaviour
     public void takeDamage(int damage)//Add invincibility frames.
     {
         if (!invincible)
-        {
-            
+        {         
             invincible = true;
             timeInvincible = invincibilityTime;
             animator.Play("Hurt");
@@ -395,6 +407,7 @@ public class Player : MonoBehaviour
             if (spriterender.flipX == true) myRigidbody.velocity = new Vector2(3, 0);
             else myRigidbody.velocity = new Vector2(-3, 0);
             manager.changeHealth(-damage);
+            playSound(hurtSound);
         }
     }
 
@@ -411,6 +424,7 @@ public class Player : MonoBehaviour
         action1Time = 0;
         action2Time = 0;
     }
+
 
     public virtual void action1(bool direction) //Direction used to know which way attack goes... obviously. But the sprite renderer is not available to each character, so it is sent here.
     {

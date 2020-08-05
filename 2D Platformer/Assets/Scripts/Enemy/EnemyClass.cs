@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyClass : MonoBehaviour
+public class EnemyClass : soundClass
 {
     public SpriteRenderer spriterender;
     public Rigidbody2D myrigidbody;
@@ -27,6 +27,9 @@ public class EnemyClass : MonoBehaviour
     int originalHealth;
     Vector3 originalPosition;
     Vector3 originalRotation;
+
+    //Sound
+    public AudioClip hitSound;
 
     // Start is called before the first frame update
     void Start()
@@ -86,6 +89,7 @@ public class EnemyClass : MonoBehaviour
             stunned = true;
             timeStunned = stunTime; 
             spriterender.enabled = false;
+            if(hitSound !=null) playSound(hitSound);
         }
     }
 

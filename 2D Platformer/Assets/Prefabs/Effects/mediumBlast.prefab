@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1671205020167518293}
   - component: {fileID: 4928450606955743958}
   - component: {fileID: 9054787367227290123}
+  - component: {fileID: -892336402770541840}
   m_Layer: 0
   m_Name: mediumBlast
   m_TagString: Untagged
@@ -102,3 +103,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-892336402770541840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006815195255833560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee09ba2212a670d499e9e4097125f3ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: b811007009cc28e40a4e36d7ae082c1c, type: 3}

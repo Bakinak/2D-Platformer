@@ -141,8 +141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e92dc95df763dea4b8aca642d9896ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriterender: {fileID: 0}
+  myrigidbody: {fileID: 0}
+  animator: {fileID: 0}
   health: 10
   damageOnTouch: 2
   movementSpeed: 0
   deathAnim: {fileID: 2006815195255833560, guid: 29882b29283c9da4094796ab6f2213fd,
     type: 3}
+  hitSound: {fileID: 8300000, guid: 0db1b5a13c80aab47a2e16ade521b8e4, type: 3}

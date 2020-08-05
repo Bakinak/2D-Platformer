@@ -171,5 +171,6 @@ MonoBehaviour:
   movementSpeed: 4
   deathAnim: {fileID: 6948591422543004691, guid: 59c93886666d207459f624ca0b489958,
     type: 3}
+  hitSound: {fileID: 8300000, guid: 0db1b5a13c80aab47a2e16ade521b8e4, type: 3}
   bossActive: 0
   hit: 0

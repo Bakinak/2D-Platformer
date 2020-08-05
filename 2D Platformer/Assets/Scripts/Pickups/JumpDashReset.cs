@@ -34,7 +34,6 @@ public class JumpDashReset : MonoBehaviour
                 toggleStuff(true);
             }
 
-
         }
         
     }

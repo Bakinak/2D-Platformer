@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class myGameManager : MonoBehaviour
+public class myGameManager : soundClass
 {
     
     //Health
@@ -45,6 +45,13 @@ public class myGameManager : MonoBehaviour
     int bossHealthDisplayed;
     int bossDamageTaken;
 
+
+    //Sound
+#pragma warning disable 0649
+    [SerializeField] AudioClip regenBossHealthSound;
+    [SerializeField] AudioClip playerHealthUpSound;
+#pragma warning restore
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,6 +91,7 @@ public class myGameManager : MonoBehaviour
                 {
                     currentHealthDisplayed += 1;
                     healthBar.GetComponent<Image>().sprite = healthSprites[currentHealthDisplayed];
+                    if(playerHealthUpSound != null) playSound(playerHealthUpSound);
                 }
                 else if (playerHealth < currentHealthDisplayed)
                 {
@@ -201,6 +209,7 @@ public class myGameManager : MonoBehaviour
         for (int i = 0; i < bossHealthSprites.Length; i++)
         {
             bossHealthBar.GetComponent<Image>().sprite = bossHealthSprites[i];
+            if(regenBossHealthSound!=null) playSound(regenBossHealthSound);
             yield return new WaitForSeconds(0.1f);
 
         }

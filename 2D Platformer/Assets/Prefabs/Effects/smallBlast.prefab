@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 4614862182331280208}
   - component: {fileID: 8937669614286788124}
   - component: {fileID: 1487502722769989601}
+  - component: {fileID: 6587792884242710186}
   m_Layer: 0
-  m_Name: smallBlast2
+  m_Name: smallBlast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -502544537
-  m_SortingLayer: -4
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: -895898179300268011, guid: 8b150aec902beb7448dca5dd4f27ef42,
     type: 3}
@@ -102,3 +103,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6587792884242710186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6948591422543004691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee09ba2212a670d499e9e4097125f3ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 19885d57d6a85b2499ab2a4169a49586, type: 3}

@@ -6,6 +6,7 @@ public class BossClass : EnemyClass
 {
     public bool bossActive;
     myGameManager manager;
+
     // Start is called before the first frame update
     void Start()
     {
