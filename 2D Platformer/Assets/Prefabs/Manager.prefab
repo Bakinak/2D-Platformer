@@ -317,6 +317,7 @@ MonoBehaviour:
   regenBossHealthSound: {fileID: 8300000, guid: 7a53fea6de10c554682dc9bc82fb2521,
     type: 3}
   playerHealthUpSound: {fileID: 8300000, guid: 4647b1e2767d9224b9b4c001961d9212, type: 3}
+  playerDeathSound: {fileID: 8300000, guid: 0947d2cc59a514b4083f5eb36de7b6ef, type: 3}
 --- !u!1 &4414201757374443152
 GameObject:
   m_ObjectHideFlags: 0

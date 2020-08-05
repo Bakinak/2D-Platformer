@@ -50,6 +50,7 @@ public class myGameManager : soundClass
 #pragma warning disable 0649
     [SerializeField] AudioClip regenBossHealthSound;
     [SerializeField] AudioClip playerHealthUpSound;
+    [SerializeField] AudioClip playerDeathSound;
 #pragma warning restore
 
     // Start is called before the first frame update
@@ -115,6 +116,7 @@ public class myGameManager : soundClass
             //Spawn death animation at player position;
             Instantiate(player.GetComponent<Player>().deathAnim, player.transform.position, player.transform.rotation);
             player.SetActive(false);
+            playSound(playerDeathSound);
             StartCoroutine(waitforDeathAnim());
             //playerDeath();
         }
