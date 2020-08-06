@@ -47,10 +47,13 @@ public class myGameManager : soundClass
 
 
     //Sound
+    AudioSource myMusic;
 #pragma warning disable 0649
     [SerializeField] AudioClip regenBossHealthSound;
     [SerializeField] AudioClip playerHealthUpSound;
     [SerializeField] AudioClip playerDeathSound;
+    [SerializeField] AudioClip levelMusic;
+    [SerializeField] AudioClip bossMusic;
 #pragma warning restore
 
     // Start is called before the first frame update
@@ -74,6 +77,10 @@ public class myGameManager : soundClass
         camScript = myCamera.GetComponent<cameraScript>();
         originalCameraPosition = myCamera.transform.position;
 
+        //Music
+        myMusic = GetComponent<AudioSource>();
+        if(levelMusic!=null) myMusic.clip = levelMusic;
+        myMusic.Play();
     }
 
     // Update is called once per frame
@@ -201,7 +208,8 @@ public class myGameManager : soundClass
     public void activateBoss()
     {
         StartCoroutine(setupBossEncounter());
-
+        myMusic.clip = bossMusic;
+        myMusic.Play();
     }
 
     IEnumerator setupBossEncounter()

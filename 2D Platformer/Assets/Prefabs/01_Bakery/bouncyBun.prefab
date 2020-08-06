@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -141900831
-  m_SortingLayer: -5
+  m_SortingLayer: -6
   m_SortingOrder: 0
   m_Sprite: {fileID: -6035257373562501263, guid: 2b0e6eb01d57518429cde94eeba1001c,
     type: 3}
@@ -150,3 +150,4 @@ MonoBehaviour:
   pressAndHold: 0
   bunBouncinessY: 20
   bunBouncinessX: 0
+  bounceSound: {fileID: 8300000, guid: a0f730bf0cd970449977f1f0440ce510, type: 3}

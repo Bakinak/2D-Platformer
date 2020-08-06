@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractEnviClass : MonoBehaviour
+public class InteractEnviClass : soundClass
 {
 #pragma warning disable 0649 //These pragma lines are used to stop console from printing warnings about these variables never being assigned. Other way to do it is to make them public instead of serialize.
     [SerializeField] bool playerTrigger;

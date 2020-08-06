@@ -7,6 +7,8 @@ public class bouncyBunScript : InteractEnviClass
     public float bunBouncinessY;
     public float bunBouncinessX;
     private Animator animator;
+    public AudioClip bounceSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +26,7 @@ public class bouncyBunScript : InteractEnviClass
     {
         collision.GetComponent<Rigidbody2D>().velocity = new Vector2(collision.GetComponent<Rigidbody2D>().velocity.x + bunBouncinessX, bunBouncinessY);
         animator.Play("bouncyBun_Animations_Bounce");
-        
+        playSound(bounceSound);
     }
 
 }

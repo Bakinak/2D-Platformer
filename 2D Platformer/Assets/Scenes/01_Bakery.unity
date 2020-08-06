@@ -1137,6 +1137,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 4414201757301134046, guid: 98ec0c70666305a49ab360f37cfe9379,
+        type: 3}
+      propertyPath: levelMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 85d637bea73e972488e0c4d4cda5a4df, type: 3}
     - target: {fileID: 4414201757301134047, guid: 98ec0c70666305a49ab360f37cfe9379,
         type: 3}
       propertyPath: m_LocalPosition.x
