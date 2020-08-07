@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyClass : soundClass
 {
+    public bool enemyActive;
+
     public SpriteRenderer spriterender;
     public Rigidbody2D myrigidbody;
     public Animator animator;
