@@ -175,6 +175,16 @@ public class myGameManager : soundClass
         }
 
         //Find all projectiles and delete them, both enemy and player.
+        GameObject[] enemyProjectiles = GameObject.FindGameObjectsWithTag("EnemyProjectile");
+        for(int i = 0; i < enemyProjectiles.Length; i++)
+        {
+            Destroy(enemyProjectiles[i]);
+        }
+        GameObject[] playerProjectiles = GameObject.FindGameObjectsWithTag("PlayerProjectile");
+        for (int i = 0; i < playerProjectiles.Length; i++)
+        {
+            Destroy(playerProjectiles[i]);
+        }
 
         //Resetting Player and placing them at checkpoint
         playerHealth = 16;

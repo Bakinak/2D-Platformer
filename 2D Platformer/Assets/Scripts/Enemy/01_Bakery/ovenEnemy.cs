@@ -10,6 +10,9 @@ public class ovenEnemy : EnemyClass
     bool shot;
     bool charging;
 
+    public GameObject projectile;
+    public Transform projectileSpawnPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +55,8 @@ public class ovenEnemy : EnemyClass
                 shot = true;
                 //Spawn projectile, and send it right direction.
                 StartCoroutine(waitForAnim(0.5f));
+                
+                Instantiate(projectile, projectileSpawnPoint.position, transform.rotation);
             }
 
         }

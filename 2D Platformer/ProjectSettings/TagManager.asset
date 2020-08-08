@@ -8,6 +8,7 @@ TagManager:
   - EnemyProjectile
   - pickUp
   - movingPlatform
+  - PlayerProjectile
   layers:
   - Default
   - TransparentFX

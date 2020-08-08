@@ -24,7 +24,7 @@ public class cameraScript : MonoBehaviour
     void Start()
     {
         manager = GameObject.Find("Manager").GetComponent<myGameManager>();
-        savePosition = transform.position;
+        saveCameraSettings();
     }
 
     // Update is called once per frame

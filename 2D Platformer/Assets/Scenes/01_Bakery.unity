@@ -691,7 +691,7 @@ PrefabInstance:
     - target: {fileID: 4800490981467394252, guid: 12a550d50b86bb24492548644fec5c6a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4800490981467394252, guid: 12a550d50b86bb24492548644fec5c6a,
         type: 3}
@@ -1268,6 +1268,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ovenEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8005335421020000654, guid: 53b1204775dbac945ae48d79ad8628ce,
+        type: 3}
+      propertyPath: coolDown
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53b1204775dbac945ae48d79ad8628ce, type: 3}
@@ -1929,7 +1934,7 @@ Transform:
   - {fileID: 3126442840448576813}
   - {fileID: 1687413671}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1878909825
 GameObject:
