@@ -185,7 +185,6 @@ public class myGameManager : soundClass
         Debug.Log("Player Died");
 
         //Do something with the camera.
-        if (currentCheckPoint == null) myCamera.transform.position = originalCameraPosition;
         camScript.resetPosition();
 
 
