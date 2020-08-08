@@ -30,10 +30,10 @@ public class EnemyPatrol : EnemyClass
 
     }
 
-    void flipRender()
+    public virtual void flipRender()
     {
         if (movementSpeed < 0) spriterender.flipX = false;
-        else spriterender.flipX = true;
+        else if(movementSpeed > 0) spriterender.flipX = true;
     }
 
     public override void callOnStart()

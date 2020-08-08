@@ -14,7 +14,7 @@ public class EnemyClass : soundClass
     public int damageOnTouch = 2;
 
     public float movementSpeed;
-    float originalMoveSpeed;
+    public float originalMoveSpeed;
     bool stunned;
     float stunTime = 0.1f;
     float timeStunned;
@@ -29,6 +29,7 @@ public class EnemyClass : soundClass
     int originalHealth;
     Vector3 originalPosition;
     Vector3 originalRotation;
+    bool originalFlipX;
 
     //Sound
     public AudioClip hitSound;
@@ -57,6 +58,7 @@ public class EnemyClass : soundClass
         originalHealth = health;
         layer = LayerMask.GetMask("Player");
         myCollider = GetComponent<BoxCollider2D>();
+        originalFlipX = spriterender.flipX;
     }
 
     public void callOnUpdate()
@@ -104,6 +106,7 @@ public class EnemyClass : soundClass
         timeStunned = 0;
         movementSpeed = originalMoveSpeed;
         if (gameObject.GetComponent<Rigidbody2D>() != null) gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        spriterender.flipX = originalFlipX;
     }
 
     void collisionDamage() //Checking whether we can damage a player. All enemies must have boxcolliders 2D for this work in its current state.

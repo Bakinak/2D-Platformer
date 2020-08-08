@@ -148,10 +148,13 @@ public class myGameManager : soundClass
     Moving objects reset their position.*/
     public void playerDeath()
     {
-        if (boss.GetComponent<BossClass>().bossActive)
+        if (boss != null)
         {
-            bossHealthBar.SetActive(false);
-            bossDamageTaken = 0;
+            if (boss.GetComponent<BossClass>().bossActive)
+            {
+                bossHealthBar.SetActive(false);
+                bossDamageTaken = 0;
+            }
         }
 
         //Respawning Enemies
