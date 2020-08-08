@@ -30,15 +30,15 @@ public class muffinEnemy : EnemyPatrol
             {
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Punched"))
                 {
-                    if (spriterender.flipX) myrigidbody.velocity = new Vector2(1.5f, 0);
-                    else myrigidbody.velocity = new Vector2(-1.5f, 0);
+                    if (spriterender.flipX) myrigidbody.velocity = new Vector2(2.5f, 0);
+                    else myrigidbody.velocity = new Vector2(-2.5f, 0);
 
                     if (!punched)
                     {
                         punched = true;
-                        Collider2D target = Physics2D.OverlapCircle(new Vector2(transform.position.x + checkDistance, transform.position.y), 0.7f, LayerMask.GetMask("Player"));
+                        Collider2D target = Physics2D.OverlapCircle(new Vector2(transform.position.x + checkDistance, transform.position.y), 0.6f, LayerMask.GetMask("Player"));
                         if (target != null) target.GetComponent<Player>().takeDamage(4);
-                        StartCoroutine(waitforAnim(0.4f));
+                        StartCoroutine(waitforAnim(0.3f));
                     }
                 }
             }

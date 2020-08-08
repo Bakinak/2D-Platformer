@@ -145,7 +145,8 @@ public class myGameManager : soundClass
     Player respawns at checkpoint.
     Camera moves to player, and keeps the booleans and clamps it had when the player reached said checkpoint, else we might fuck up later.
     Pickups respawn.
-    Moving objects reset their position.*/
+    Moving objects reset their position.
+    Also remove all projectiles!*/
     public void playerDeath()
     {
         if (boss != null)
@@ -172,6 +173,8 @@ public class myGameManager : soundClass
         {
             //Reset their position. All moving platforms must come from one class that has a function that resets their position.
         }
+
+        //Find all projectiles and delete them, both enemy and player.
 
         //Resetting Player and placing them at checkpoint
         playerHealth = 16;
