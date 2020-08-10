@@ -29,6 +29,10 @@ public class bottomlessPit : MonoBehaviour
             collision.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             collision.transform.position = respawnPoint.position;
         }
+        else if(collision.tag == "Enemy")
+        {
+            collision.gameObject.SetActive(false);
+        }
     }
 
 }
