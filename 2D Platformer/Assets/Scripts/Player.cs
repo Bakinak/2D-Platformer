@@ -435,4 +435,22 @@ public class Player : soundClass
     {
 
     }
+
+    //Sticking to moving platforms
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "movingPlatform")
+        {
+            transform.parent = collision.transform;
+        }
+    }
+    //Unsticking from moving platforms
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "movingPlatform")
+        {
+            transform.parent = null;
+        }
+    }
+
 }

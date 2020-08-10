@@ -140,7 +140,7 @@ public class myGameManager : soundClass
         }
         StartCoroutine(ui.fadeToBlack(true, 2));
     }
-    /*Function that should be called when player dies. What is gonna need to happen:
+    /*Function that should be called when player dies. Is currently called from UI class I think. What is gonna need to happen:
     Enemies respawn.
     Player respawns at checkpoint.
     Camera moves to player, and keeps the booleans and clamps it had when the player reached said checkpoint, else we might fuck up later.
@@ -171,7 +171,7 @@ public class myGameManager : soundClass
         //Resetting moving platforms
         for (int i = 0; i < movingPlatforms.Length; i++)
         {
-            //Reset their position. All moving platforms must come from one class that has a function that resets their position.
+            movingPlatforms[i].GetComponent<movingPlatform>().resetObject();
         }
 
         //Find all projectiles and delete them, both enemy and player.
