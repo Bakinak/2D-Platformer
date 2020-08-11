@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4559101969895986499}
   - component: {fileID: 391374300505463160}
   - component: {fileID: 8924987013921722445}
+  - component: {fileID: 7251671935493650261}
   m_Layer: 8
   m_Name: 01_topBlock
   m_TagString: Untagged
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -141900831
-  m_SortingLayer: -5
+  m_SortingLayer: -6
   m_SortingOrder: 0
   m_Sprite: {fileID: -461162145556789326, guid: 9027e9113794c574a8505bee11472fa8,
     type: 3}
@@ -121,3 +122,15 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.5, y: 0.5}
   - {x: 0.5, y: 0.5}
+--- !u!114 &7251671935493650261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136818879776638330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aea529a73b19784c972bf500969207f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
