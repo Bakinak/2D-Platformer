@@ -46,6 +46,9 @@ public class myGameManager : soundClass
     int bossDamageTaken;
 
 
+    GameObject[] enemyActivators;
+
+
     //Sound
     AudioSource myMusic;
 #pragma warning disable 0649
@@ -57,7 +60,7 @@ public class myGameManager : soundClass
 #pragma warning restore
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //StartCoroutine(ui.fadeToBlack(true));
         playerHealth = 16;
@@ -76,6 +79,8 @@ public class myGameManager : soundClass
         myCamera = GameObject.FindGameObjectWithTag("MainCamera");
         camScript = myCamera.GetComponent<cameraScript>();
         originalCameraPosition = myCamera.transform.position;
+
+        enemyActivators = GameObject.FindGameObjectsWithTag("ActivatorTrigger");
 
         //Music
         myMusic = GetComponent<AudioSource>();
@@ -161,6 +166,7 @@ public class myGameManager : soundClass
         //Respawning Enemies
         for (int i = 0; i<levelEnemies.Length; i++) 
         {
+            if(levelEnemies[i].GetComponent<EnemyClass>().enemyActive)
             levelEnemies[i].GetComponent<EnemyClass>().respawn();
         }
         //Pickup Respawn
@@ -197,6 +203,11 @@ public class myGameManager : soundClass
         //Do something with the camera.
         camScript.resetPosition();
 
+        //Resetting Enemy Activation Triggers
+        for(int i = 0; i < enemyActivators.Length; i++)
+        {
+            enemyActivators[i].GetComponent<enemyActivator>().triggerActivated = false;
+        }
 
         StartCoroutine(ui.fadeToBlack(false));
     }

@@ -82,12 +82,12 @@ public class enemyFlying : EnemyClass
 
         if (maxFlyDistanceX != 0)
         {
-            if (transform.position.x <= xClampL || transform.position.x >= xClampR) movementSpeed *= -1;
+            if (transform.position.x <= xClampL && movementSpeed < 0 || transform.position.x >= xClampR && movementSpeed > 0) movementSpeed *= -1;
         }
 
         if (maxFlyDistanceY != 0)
         {
-            if (transform.position.y <= yClampB || transform.position.y >= yClampT) yMovementSpeed *= -1;
+            if (transform.position.y <= yClampB && yMovementSpeed < 0 || transform.position.y >= yClampT && yMovementSpeed > 0) yMovementSpeed *= -1;
         }
     }
 

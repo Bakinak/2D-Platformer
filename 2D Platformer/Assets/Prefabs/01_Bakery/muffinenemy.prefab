@@ -213,7 +213,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &6749125092059066504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,6 +233,7 @@ MonoBehaviour:
   health: 15
   damageOnTouch: 2
   movementSpeed: 4
+  originalMoveSpeed: 0
   deathAnim: {fileID: 6948591422543004691, guid: 59c93886666d207459f624ca0b489958,
     type: 3}
   hitSound: {fileID: 8300000, guid: 0db1b5a13c80aab47a2e16ade521b8e4, type: 3}
