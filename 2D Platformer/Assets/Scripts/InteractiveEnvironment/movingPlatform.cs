@@ -11,7 +11,9 @@ public class movingPlatform : MonoBehaviour
     Vector3 lastPosition;
 
     Vector3 originalPosition;
-
+    public float waitTime;
+    float timeWaited;
+    bool waiting;
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +36,20 @@ public class movingPlatform : MonoBehaviour
     void riggedMovement()
     {
         //Use movetowards.
-        transform.position = Vector2.MoveTowards(transform.position, movePoints[currentTarget].position, movementSpeed * Time.deltaTime);
-        nextTarget();
+        if (!waiting)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, movePoints[currentTarget].position, movementSpeed * Time.deltaTime);
+            nextTarget();
+        }
+        else
+        {
+            timeWaited += Time.deltaTime;
+            if (timeWaited >= waitTime)
+            {
+                timeWaited = 0;
+                waiting = false;
+            }
+        }
     }
 
 
@@ -45,6 +59,7 @@ public class movingPlatform : MonoBehaviour
         {
             currentTarget += 1;
             if (currentTarget == movePoints.Length) currentTarget = 0;
+            waiting = true;
         }
     }
 
@@ -52,6 +67,8 @@ public class movingPlatform : MonoBehaviour
     {
         transform.position = originalPosition;
         currentTarget = 0;
+        waiting = false;
+        timeWaited = 0;
     }
 
 }
