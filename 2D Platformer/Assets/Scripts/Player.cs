@@ -153,19 +153,6 @@ public class Player : soundClass
             attacks();
         }
 
-        /*if (adaptiveCamera)
-        {
-            //Moving Camera
-            if (Input.GetAxisRaw("Horizontal") != 0)
-            {
-                camTarget.localPosition = new Vector3(Mathf.Lerp(camTarget.localPosition.x, aheadAmount * Input.GetAxisRaw("Horizontal"), aheadSpeed * Time.deltaTime), camTarget.localPosition.y, camTarget.localPosition.z);
-            }
-            else
-            {
-                camTarget.localPosition = new Vector3(Mathf.Lerp(camTarget.localPosition.x, 0, aheadSpeed / 2 * Time.deltaTime), camTarget.localPosition.y, camTarget.localPosition.z);
-            }
-        }*/
-
         //Limiting max falling speed
         if (myRigidbody.velocity.y < -20) myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, -20f);
 
@@ -228,7 +215,7 @@ public class Player : soundClass
         //Jump Buffer
         if (Input.GetButtonDown("Jump"))
         {
-            if (!isGrounded && doubleJumpAvailable && myRigidbody.velocity.y > doubleJumpMaxDownwardVelocity && hangCounter >= hangTime)//Check if we are in the air and can do a double jump. If not, we do normal jumping
+            if (!isGrounded && doubleJumpAvailable /*&& !Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y - 2.5f), 0.4f, LayerMask.GetMask("Ground"))*/ && hangCounter >= hangTime)//Check if we are in the air and can do a double jump. If not, we do normal jumping
             {
                 myRigidbody.velocity = new Vector2(myRigidbody.velocity.x * doubleJumpSpeedImpact, jumpForce*doubleJumpForce);
                 doubleJumpAvailable = false; //Disable it after one.
@@ -277,11 +264,11 @@ public class Player : soundClass
             myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y * 0.5f);
         }
 
-
+        /* Disabled quick falling, because it let to problems and is never useful.
         if (Input.GetAxis("Vertical") < 0) //Making it so that if you hold down, you fall quicker.
         {
             myRigidbody.gravityScale = quickFallGrav;
-        }
+        }*/
 
     }
 
