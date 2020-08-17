@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class enemyProjectileClass : ProjectileClass
 {
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,7 @@ public class enemyProjectileClass : ProjectileClass
             GameObject target = collision.gameObject;
             playerHit(target);
         }
+        
     }
 
 
