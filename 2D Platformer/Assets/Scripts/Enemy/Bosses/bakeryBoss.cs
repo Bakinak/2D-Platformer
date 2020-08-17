@@ -107,7 +107,6 @@ public class bakeryBoss : BossClass
         
         if(timePassed >= coolDownTime || Physics2D.OverlapCircle(new Vector2(transform.position.x + movementSpeed/4, transform.position.y + 2), 2f, LayerMask.GetMask("Ground"))){
             attackOver();
-            Debug.Log("resetting attack 0");
             myAudio.Stop();
             myAudio.loop = false;
         }
@@ -122,7 +121,6 @@ public class bakeryBoss : BossClass
         if(!oneTimeThings){
             animator.Play("ChargeJump");
             oneTimeThings = true;
-            Debug.Log("Charge Jump");
         }
         
     
@@ -132,14 +130,12 @@ public class bakeryBoss : BossClass
                 OneTimeThing2 = true;
                 chooseDirection();
                 myrigidbody.velocity = new Vector2(movementSpeed * 2, jumpForce);
-                Debug.Log("Should Jump");
                 playSound(jumpSound);
             }
         }
                 
         if(!OneTimeThing3 && animator.GetCurrentAnimatorStateInfo(0).IsName("Land")){
             attackOver();
-            Debug.Log("Landed");
             Instantiate(shockWave, shockWaveSpawnSpot.position, Quaternion.Euler(0, 180, 0));
             Instantiate(shockWave, shockWaveSpawnSpot.position, Quaternion.Euler(0, 0, 0));
             playSound(landSound);

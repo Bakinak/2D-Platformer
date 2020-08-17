@@ -24,6 +24,7 @@ public class cameraScript : MonoBehaviour
     void Start()
     {
         manager = GameObject.Find("Manager").GetComponent<myGameManager>();
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         saveCameraSettings();
     }
 

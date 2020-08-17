@@ -72,7 +72,7 @@ public class Player : soundClass
 
     //Invincibility and spriteflicker
     bool invincible;
-    float invincibilityTime = 0.6f; //How long the player can't take damage after having taken damage. Safety time, so your health isn't just drained.
+    float invincibilityTime = 0.7f; //How long the player can't take damage after having taken damage. Safety time, so your health isn't just drained.
     float timeInvincible;
     float blinkTime = 0.07f; //Lower this to make the character flicker faster when hit.
     float timeBlinked;
