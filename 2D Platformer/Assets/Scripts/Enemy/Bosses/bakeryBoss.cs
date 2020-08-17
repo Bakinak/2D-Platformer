@@ -98,6 +98,7 @@ public class bakeryBoss : BossClass
             myAudio.clip = walkingSound;
             myAudio.loop = true;
             myAudio.Play();
+            damageOnTouch = 3;
         }        
         
         myrigidbody.velocity = new Vector2(movementSpeed*2.5f, myrigidbody.velocity.y);        
@@ -204,6 +205,7 @@ public class bakeryBoss : BossClass
     }
     
     public override void respawn(){
+        base.respawn();
         attackOver();
         actionChooser = 4;
         animator.Play("Idle");
