@@ -43816,6 +43816,12 @@ PrefabInstance:
       propertyPath: suckForce
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6553036067866174493, guid: 97e8c92c36c78e04ba8b9c1e42e70ddf,
+        type: 3}
+      propertyPath: skippzzz
+      value: 
+      objectReference: {fileID: 1194102700218787406, guid: 24b1ba601bebbd14a9b49373eb6296ba,
+        type: 3}
     - target: {fileID: 6553036067866174495, guid: 97e8c92c36c78e04ba8b9c1e42e70ddf,
         type: 3}
       propertyPath: m_AutoTiling

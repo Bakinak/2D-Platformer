@@ -31,6 +31,7 @@ public class Mike : Player
 
     public override void action1(bool direction)
     {
+        base.action1(direction);
         if (!direction)
         {
             enemiesToDamage = Physics2D.OverlapAreaAll(attackPos1.position, attackPos2.position, enemyLayer);
@@ -52,6 +53,7 @@ public class Mike : Player
 
     public override void action2(bool direction)
     {
+        base.action2(direction);
         enemiesToDamage = Physics2D.OverlapAreaAll(attack2Pos1.position, attack2Pos2.position, enemyLayer);
         var slash = Instantiate(swordSlash, new Vector3(transform.position.x, transform.position.y + slashDistance), Quaternion.Euler(new Vector3(0,0,90)));
         slash.transform.parent = transform;

@@ -328,11 +328,11 @@ public class Player : soundClass
         animator.SetFloat("Speed", Mathf.Abs(myRigidbody.velocity.x));
         animator.SetFloat("yVelocity", myRigidbody.velocity.y);
 
-        if (myRigidbody.velocity.x > 0)
+        if (horizontal > 0 && walkState)
         {
             spriterender.flipX = false;
         }
-        else if (myRigidbody.velocity.x < 0)
+        else if (horizontal < 0 && walkState)
         {
             spriterender.flipX = true;
         }
@@ -361,17 +361,12 @@ public class Player : soundClass
             if (action1Buffer > 0 && action1Time <= 0)
             {
                 action1(spriterender.flipX);
-                action1Time = action1Cooldown;
-                walkState = true;
-                animator.Play("Attack");
+
             }
 
             if (action2Buffer > 0 && action2Time <= 0)
             {
                 action2(spriterender.flipX);
-                action2Time = action2Cooldown;
-                walkState = true;
-                animator.Play("SpecialAttack");
             }
         }
 
@@ -413,14 +408,18 @@ public class Player : soundClass
     }
 
 
-    public virtual void action1(bool direction) //Direction used to know which way attack goes... obviously. But the sprite renderer is not available to each character, so it is sent here.
+    public virtual void action1(bool direction) //Direction used to know which way attack goes. But the sprite renderer is not available to each character, so it is sent here.
     {
-
+        action1Time = action1Cooldown;
+        walkState = true;
+        animator.Play("Attack");
     }
 
     public virtual void action2(bool direction)
     {
-
+        action2Time = action2Cooldown;
+        walkState = true;
+        animator.Play("SpecialAttack");
     }
 
     //Sticking to moving platforms

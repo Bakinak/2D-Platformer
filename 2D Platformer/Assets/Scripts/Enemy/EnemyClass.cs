@@ -85,6 +85,7 @@ public class EnemyClass : soundClass
 
         if(health <= 0)
         {
+            death();
             if(deathAnim != null) Instantiate(deathAnim, transform.position, transform.rotation);
             gameObject.SetActive(false);
         }
@@ -107,6 +108,10 @@ public class EnemyClass : soundClass
         movementSpeed = originalMoveSpeed;
         if (gameObject.GetComponent<Rigidbody2D>() != null) gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         spriterender.flipX = originalFlipX;
+    }
+
+    public virtual void death(){
+        
     }
 
     void collisionDamage() //Checking whether we can damage a player. All enemies must have boxcolliders 2D for this work in its current state.

@@ -19,7 +19,8 @@ public class bakeryBoss : BossClass
     public float suckForce = 2;
     public Transform groundChecker, shockWaveSpawnSpot;
     public GameObject shockWave;
-    public bool grounded;
+    bool grounded;
+    public GameObject skippzzz;
     
     AudioSource myAudio;
     public AudioClip jumpSound, landSound, suckingSound, walkingSound;
@@ -207,5 +208,11 @@ public class bakeryBoss : BossClass
         animator.Play("Idle");
         myAudio.Stop();
         myAudio.loop = false;
+    }
+    
+    public override void death(){
+        GameObject hello = Instantiate(skippzzz, transform);
+        hello.transform.parent = null;
+        hello.SetActive(true);       
     }
 }
