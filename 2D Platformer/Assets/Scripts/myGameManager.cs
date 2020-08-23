@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class myGameManager : soundClass
 {
-    
+    public GameObject[] playerPrefabs;
+    GameObject[] playerInstances;
+    public Transform playerStartSpawn;
+    int currentCharacter;
     //Health
     public int playerHealth;
     int currentHealthDisplayed;
@@ -30,7 +33,7 @@ public class myGameManager : soundClass
     public GameObject[] movingPlatforms;
 
     //Checkpoints and player
-    GameObject player;
+    public GameObject player;
     Player playerScript;
     Vector3 playerSpawnPoint;
     GameObject currentCheckPoint;
@@ -62,6 +65,16 @@ public class myGameManager : soundClass
     // Start is called before the first frame update
     void Awake()
     {
+        //Spawning all available player characters and setting them to inactive except the first one.
+        playerInstances = new GameObject[playerPrefabs.Length];
+        for(int i = 0; i < playerPrefabs.Length; i++){
+            playerInstances[i] = Instantiate(playerPrefabs[i], playerStartSpawn);
+            if(i > 0){
+                playerInstances[i].GetComponent<Player>().putThisInStart();
+                playerInstances[i].SetActive(false);             
+            }
+        }
+        
         //StartCoroutine(ui.fadeToBlack(true));
         playerHealth = 16;
         healthBar.GetComponent<Image>().sprite = healthSprites[playerHealth];
@@ -134,7 +147,33 @@ public class myGameManager : soundClass
         }
         //healthBar.GetComponent<Image>().sprite = healthSprites[playerHealth];
     }
-
+    
+    //Swapping between characters. Called from the player script.
+    public void characterChange(int nextOrPrevious){
+        currentCharacter += nextOrPrevious; //Selecting next character.
+        if(currentCharacter < 0) currentCharacter = playerInstances.Length - 1;
+        else if(currentCharacter > playerInstances.Length - 1) currentCharacter = 0;
+        
+        if(playerInstances[currentCharacter] != player){
+        
+            playerInstances[currentCharacter].transform.position = player.transform.position;
+            bool flipped = player.GetComponent<SpriteRenderer>().flipX;
+            player.SetActive(false);
+            
+            player = playerInstances[currentCharacter];
+            player.SetActive(true);
+            playerScript = player.GetComponent<Player>();
+            player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            player.GetComponent<SpriteRenderer>().flipX = flipped;
+            
+            //Set camera target to be new player, but only if the target was already a player, so it doesn't mess up any camera moving events.
+            if(camScript.target.tag == "Player") camScript.target = player.transform;
+            
+            playerScript.tagIn();
+        }
+    }
+    
+    
     IEnumerator waitforDeathAnim()
     {
         float timevar = 0;

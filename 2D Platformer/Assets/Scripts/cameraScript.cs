@@ -106,6 +106,9 @@ public class cameraScript : MonoBehaviour
         followX = saveFollowX;
         followY = saveFollowY;
         target = saveTarget;
+        if(target.tag == "Player"){ //Making sure we follow the current player.
+            target = manager.player.transform;
+        }
     }
 
 }

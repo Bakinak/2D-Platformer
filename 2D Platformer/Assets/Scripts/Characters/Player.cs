@@ -84,6 +84,7 @@ public class Player : soundClass
     float horizontal;
 
     public GameObject deathAnim;
+    public GameObject tagInAnim;
 
     //Sound
 #pragma warning disable 0649
@@ -92,6 +93,7 @@ public class Player : soundClass
     [SerializeField] AudioClip airdashSound;
     [SerializeField] AudioClip slideSound;
     [SerializeField] AudioClip hurtSound;
+    [SerializeField] AudioClip tagInSound;
 #pragma warning restore
 
     void Start()
@@ -151,6 +153,7 @@ public class Player : soundClass
             jump();
             slide();
             attacks();
+            switchCharacter();
         }
 
         //Limiting max falling speed
@@ -377,6 +380,16 @@ public class Player : soundClass
 
     }
 
+    void switchCharacter(){
+        if(isGrounded && walkState){
+            if(Input.GetButtonDown("LB")){
+                manager.characterChange(-1);
+            } else if(Input.GetButtonDown("RB")){
+                manager.characterChange(1);
+            }
+        }
+    }
+
     public void takeDamage(int damage)//Add invincibility frames.
     {
         if (!invincible)
@@ -420,6 +433,12 @@ public class Player : soundClass
         action2Time = action2Cooldown;
         walkState = true;
         animator.Play("SpecialAttack");
+    }
+    
+    public virtual void tagIn(){ //Called from myGameManager when character is changed to.
+        //Instantiate(tagInAnim, transform);
+        playSound(tagInSound);
+        animator.Play("TagIn");     
     }
 
     //Sticking to moving platforms

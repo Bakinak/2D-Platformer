@@ -225,15 +225,18 @@ MonoBehaviour:
   vertical: 0
   deathAnim: {fileID: 8912812856970487011, guid: 9ddf0725be167e34eb425a949c5f4ac7,
     type: 3}
+  tagInAnim: {fileID: 0}
   jumpSound: {fileID: 8300000, guid: fc6086b703cf4cc47aab6132e89115e9, type: 3}
   doubleJumpSound: {fileID: 8300000, guid: 293bba855b5eba0498c5fd37bdbb38f9, type: 3}
   airdashSound: {fileID: 8300000, guid: 9c530ec9cd64c524ab1af95f469a72a1, type: 3}
   slideSound: {fileID: 8300000, guid: f2b347c431604f8439c17db1aba73fa1, type: 3}
   hurtSound: {fileID: 8300000, guid: 504e759663d99284ba8438190a4b0ecf, type: 3}
+  tagInSound: {fileID: 8300000, guid: d553afef2eeb87e41a55ae78e69e0116, type: 3}
   projectiles:
   - {fileID: 7615603345126141682, guid: 0b4087aa591ed934c88bdaea181bb449, type: 3}
   - {fileID: 8832606942898980998, guid: 52b9be3342395d9459767a642ec5af5f, type: 3}
   - {fileID: 9033415492599894788, guid: d680593ff18101349ba41e49867bb031, type: 3}
+  throwSound: {fileID: 8300000, guid: f7b051a82fa20a74eb55b3b1ad84ee5b, type: 3}
 --- !u!1 &7725018152205306283
 GameObject:
   m_ObjectHideFlags: 0

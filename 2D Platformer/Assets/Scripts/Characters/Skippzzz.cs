@@ -5,6 +5,7 @@ using UnityEngine;
 public class Skippzzz : Player
 {
     public GameObject[] projectiles;
+    public AudioClip throwSound;
     int nextProjectile;
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class Skippzzz : Player
         }
         nextProjectile +=1;
         if(nextProjectile > 2) nextProjectile = 0; 
+        playSound(throwSound);
     }
     
     public override void action2(bool direction){
