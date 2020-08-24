@@ -30,7 +30,7 @@ public class enemyProjectileClass : ProjectileClass
 
     public virtual void playerHit(GameObject target)
     {
-        target.GetComponent<Player>().takeDamage(damage);
+        target.GetComponent<Player>().takeDamage(damage, 1);
         expire();
     }
 

@@ -25,7 +25,7 @@ public class bottomlessPit : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            collision.GetComponent<Player>().takeDamage(damage);
+            collision.GetComponent<Player>().takeDamage(damage, 2);
             collision.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             collision.transform.position = respawnPoint.position;
         }

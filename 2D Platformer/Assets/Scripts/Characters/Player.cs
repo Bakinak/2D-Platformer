@@ -7,7 +7,7 @@ public class Player : soundClass
 {
     public bool inControl = true;
 
-    private Rigidbody2D myRigidbody;
+    public Rigidbody2D myRigidbody;
     private BoxCollider2D myBoxCollider;
     private Animator animator;
     private SpriteRenderer spriterender;
@@ -63,6 +63,7 @@ public class Player : soundClass
     private float standardGrav;
 
     //Attacks
+    public bool action1Hold, action2Hold;
     public float action1Cooldown;
     float action1Time;
     public float action2Cooldown;
@@ -355,10 +356,17 @@ public class Player : soundClass
 
     void attacks()
     {
-        if (Input.GetButtonDown("Fire2")) action1Buffer = jumpBufferLength;
-
-        if (Input.GetButtonDown("Fire3")) action2Buffer = jumpBufferLength;
-
+        if(!action1Hold){
+            if (Input.GetButtonDown("Fire2")) action1Buffer = jumpBufferLength;
+        } else{
+            if (Input.GetButton("Fire2")) action1Buffer = jumpBufferLength;
+        }
+        if(!action2Hold){
+            if (Input.GetButtonDown("Fire3")) action2Buffer = jumpBufferLength;
+        } else{
+            if (Input.GetButton("Fire3")) action2Buffer = jumpBufferLength;
+        }
+        
         if (walkState || isGrounded)
         {
             if (action1Buffer > 0 && action1Time <= 0)
@@ -366,7 +374,7 @@ public class Player : soundClass
                 action1(spriterender.flipX);
 
             }
-
+            
             if (action2Buffer > 0 && action2Time <= 0)
             {
                 action2(spriterender.flipX);
@@ -377,7 +385,6 @@ public class Player : soundClass
         if (action2Buffer >= 0) action2Buffer -= Time.deltaTime;
         if (action1Time > 0) action1Time -= Time.deltaTime;
         if (action2Time > 0) action2Time -= Time.deltaTime;
-
     }
 
     void switchCharacter(){
@@ -390,9 +397,9 @@ public class Player : soundClass
         }
     }
 
-    public void takeDamage(int damage)//Add invincibility frames.
+    public virtual void takeDamage(int damage, int damageType)//Damage type is one of three = 0 = onTouch damage, 1 = projectile damage, 2 = bottomlessPit damage.
     {
-        if (!invincible)
+        if (!invincible || damageType == 2)
         {         
             invincible = true;
             timeInvincible = invincibilityTime;
@@ -403,8 +410,9 @@ public class Player : soundClass
             else myRigidbody.velocity = new Vector2(-3, 0);
             manager.changeHealth(-damage);
             playSound(hurtSound);
-        }
+        } 
     }
+    
 
     public void gainHealth(int heal) //Play healing sound also. Unless that is done in the manager every time health ticks up.
     {

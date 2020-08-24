@@ -37,7 +37,7 @@ public class muffinEnemy : EnemyPatrol
                     {
                         punched = true;
                         Collider2D target = Physics2D.OverlapCircle(new Vector2(transform.position.x + checkDistance, transform.position.y), 0.6f, LayerMask.GetMask("Player"));
-                        if (target != null) target.GetComponent<Player>().takeDamage(4);
+                        if (target != null) target.GetComponent<Player>().takeDamage(4, 0);
                         StartCoroutine(waitforAnim(0.3f));
                     }
                 }

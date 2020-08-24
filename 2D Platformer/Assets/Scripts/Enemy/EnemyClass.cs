@@ -118,7 +118,7 @@ public class EnemyClass : soundClass
     {
         playerToDamage = Physics2D.OverlapArea(new Vector2(transform.position.x - myCollider.size.x / 2, transform.position.y - myCollider.size.y / 2), 
             new Vector2(transform.position.x + myCollider.size.x / 2, transform.position.y + myCollider.size.y / 2), layer);
-        if (playerToDamage != null) playerToDamage.GetComponent<Player>().takeDamage(damageOnTouch);
+        if (playerToDamage != null) playerToDamage.GetComponent<Player>().takeDamage(damageOnTouch, 0);
     }
 
 }
