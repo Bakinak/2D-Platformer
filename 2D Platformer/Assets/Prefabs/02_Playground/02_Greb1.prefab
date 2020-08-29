@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7069423408588034712}
   - component: {fileID: 1481759311837704137}
   - component: {fileID: 4377699256308100400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 02_Greb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +48,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -69,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -141900831
+  m_SortingLayer: -6
   m_SortingOrder: 0
   m_Sprite: {fileID: 4173869257672611158, guid: 2debeeec2f211fd4c99afe252d576eda,
     type: 3}
@@ -126,3 +127,7 @@ EdgeCollider2D:
   - {x: -0.19, y: -0.34}
   - {x: -0.5, y: -0.1}
   - {x: -0.5, y: 0.35}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
