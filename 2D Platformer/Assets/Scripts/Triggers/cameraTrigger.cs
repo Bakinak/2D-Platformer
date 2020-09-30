@@ -40,6 +40,7 @@ public class cameraTrigger : MonoBehaviour
                 camScript.followX = followX;
                 camScript.followY = followY;
             }
+            Debug.Log("Player hit camera trigger");
         }
     }
 }

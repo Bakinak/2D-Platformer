@@ -154,12 +154,13 @@ public class myGameManager : soundClass
         if(currentCharacter < 0) currentCharacter = playerInstances.Length - 1;
         else if(currentCharacter > playerInstances.Length - 1) currentCharacter = 0;
         
-        if(playerInstances[currentCharacter] != player){
+        if(playerInstances[currentCharacter] != player){ //Only calling this if you are actually changing character.
         
             playerInstances[currentCharacter].transform.position = player.transform.position;
             bool flipped = player.GetComponent<SpriteRenderer>().flipX;
             player.SetActive(false);
-            
+            playerInstances[currentCharacter].transform.parent = player.transform.parent;
+
             player = playerInstances[currentCharacter];
             player.SetActive(true);
             playerScript = player.GetComponent<Player>();

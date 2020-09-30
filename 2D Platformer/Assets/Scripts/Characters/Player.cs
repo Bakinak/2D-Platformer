@@ -268,7 +268,7 @@ public class Player : soundClass
             myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y * 0.5f);
         }
 
-        /* Disabled quick falling, because it let to problems and is never useful.
+        /* Disabled quick falling, because it led to problems and is never useful.
         if (Input.GetAxis("Vertical") < 0) //Making it so that if you hold down, you fall quicker.
         {
             myRigidbody.gravityScale = quickFallGrav;
@@ -462,7 +462,7 @@ public class Player : soundClass
     {
         if (collision.gameObject.tag == "movingPlatform")
         {
-            transform.parent = null;
+            if(transform.parent!=null) transform.parent = null;
         }
     }
 
