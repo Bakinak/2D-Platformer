@@ -4,14 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEditor;
-using UnityEditor.Experimental.AssetImporters;
+
 using UnityEngine;
 
 namespace Aseprite2Unity.Editor
 {
     [CustomEditor(typeof(AsepriteImporter))]
     [CanEditMultipleObjects]
-    public class AsepriteImporterEditor : ScriptedImporterEditor
+    public class AsepriteImporterEditor : UnityEditor.AssetImporters.ScriptedImporterEditor
     {
         private readonly string[] m_AnimatorCullingModeNames = EnumExtensions.GetUpToDateEnumNames<AnimatorCullingMode>();
 
