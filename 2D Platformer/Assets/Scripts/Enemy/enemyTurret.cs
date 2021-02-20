@@ -38,15 +38,21 @@ public class enemyTurret : EnemyClass
         }
         else
         {
-            if(Vector2.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, transform.position) <= aggroDistance) {
-            //Attack!
-                if (!charging)
+            if (GameObject.FindGameObjectWithTag("Player"))
+            {
+                if (Vector2.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, transform.position) <= aggroDistance)
                 {
-                    charging = true;
-                    animator.Play("Charge");
+                    //Attack!
+                    if (!charging)
+                    {
+                        charging = true;
+                        animator.Play("Charge");
+                    }
                 }
-            } else{
-                timePassed = 0;
+                else
+                {
+                    timePassed = 0;
+                }
             }
         }
         
